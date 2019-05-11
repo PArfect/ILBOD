@@ -215,8 +215,6 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
 
             final List<Classifier.Recognition> mappedRecognitions =
                 new LinkedList<Classifier.Recognition>();
-
-            HashMap<String, Objet> objetsDetectes = new HashMap<String, Objet>();
             for (final Classifier.Recognition result : results) {
               final RectF location = result.getLocation();
 
@@ -225,7 +223,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
 
                 Objet obj = gestionCarte.objetsExistants.get(result.getTitle());
                 if (obj != null){
-                  objetsDetectes.put(result.getTitle(),obj);
+                  gestionLoca.ajoutObjetDetecte(obj);
                 }
 
                 cropToFrameTransform.mapRect(location);
@@ -234,7 +232,6 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                 mappedRecognitions.add(result);
               }
             }
-            gestionLoca.miseAjourObjetsDetectes(objetsDetectes);
             gestionLoca.miseAJourLieuxProbables();
 
             tracker.trackResults(mappedRecognitions, luminanceCopy, currTimestamp);
@@ -248,9 +245,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                 new Runnable() {
                   @Override
                   public void run() {
-                    showFrameInfo(lieuTrouve.getNom() + "x" + previewHeight);
-                    showCropInfo(cropCopyBitmap.getWidth() + "x" + cropCopyBitmap.getHeight());
-                    showInference(lastProcessingTimeMs + "ms");
+                    showFrameInfo(lieuTrouve.getNom());
                   }
                 });
           }

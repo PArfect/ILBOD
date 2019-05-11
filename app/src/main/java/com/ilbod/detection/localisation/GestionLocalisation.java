@@ -27,11 +27,12 @@ public class GestionLocalisation {
         lieuxprobables = new ArrayList<>();
     }
 
-    public void miseAjourObjetsDetectes(HashMap<String, Objet> objetsDetectes){
+    public void resetObjetsDetectes(){
         this.objetsDetectes = new HashMap<String, Objet>();
-        for(HashMap.Entry<String, Objet> entry : objetsDetectes.entrySet()){
-            this.objetsDetectes.put(entry.getKey(),entry.getValue());
-        }
+    }
+
+    public void ajoutObjetDetecte(Objet objet){
+        this.objetsDetectes.put(objet.getNom(),objet);
     }
 
     /**
