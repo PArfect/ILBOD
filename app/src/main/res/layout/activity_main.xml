@@ -8,11 +8,12 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="268dp"
-        android:layout_height="421dp"
+        android:layout_width="257dp"
+        android:layout_height="395dp"
+        android:gravity="center"
         android:src="@drawable/logo"
-        tools:layout_editor_absoluteX="71dp"
-        tools:layout_editor_absoluteY="178dp" />
+        tools:layout_editor_absoluteX="77dp"
+        tools:layout_editor_absoluteY="156dp" />
 
     <Button
         android:id="@+id/button"
@@ -20,6 +21,7 @@
         android:layout_height="wrap_content"
         android:text="Lancer la détection"
         android:onClick="lancerDetection"
+        android:gravity="center"
         tools:layout_editor_absoluteX="117dp"
         tools:layout_editor_absoluteY="551dp" />
 </android.support.constraint.ConstraintLayout>

@@ -38,10 +38,9 @@ import com.ilbod.detection.env.ImageUtils;
 import com.ilbod.detection.env.Logger;
 import com.ilbod.detection.tflite.Classifier;
 import com.ilbod.detection.tflite.TFLiteObjectDetectionAPIModel;
-import com.ilbod.detection.tracking.MultiBoxTracker;
+import org.tensorflow.demo.tracking.MultiBoxTracker;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
