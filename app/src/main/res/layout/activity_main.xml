@@ -8,20 +8,31 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="257dp"
-        android:layout_height="395dp"
-        android:gravity="center"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="77dp"
+        android:layout_marginTop="141dp"
+        android:layout_marginEnd="77dp"
+        android:layout_marginBottom="15dp"
         android:src="@drawable/logo"
-        tools:layout_editor_absoluteX="77dp"
-        tools:layout_editor_absoluteY="156dp" />
+        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Lancer la détection"
-        android:onClick="lancerDetection"
+        android:layout_marginStart="40dp"
+        android:layout_marginBottom="132dp"
         android:gravity="center"
-        tools:layout_editor_absoluteX="117dp"
-        tools:layout_editor_absoluteY="551dp" />
+        android:onClick="lancerDetection"
+        android:background="@color/colorPrimary"
+        android:text="@string/boutonMain"
+        android:padding="5dp"
+        android:textColor="@color/colorSecondary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 </android.support.constraint.ConstraintLayout>

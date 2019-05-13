@@ -15,6 +15,7 @@
 -->
 
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -27,12 +28,13 @@
         android:orientation="vertical">
 
 
-        <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
+        <FrameLayout
             android:id="@+id/container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context="org.tensorflow.demo.CameraActivity" />
+            tools:context="org.tensorflow.demo.CameraActivity">
+
+        </FrameLayout>
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
@@ -40,13 +42,41 @@
             android:layout_height="?attr/actionBarSize"
             android:layout_alignParentTop="true"
             android:background="@color/semi_transparent">
+            <LinearLayout
+                android:layout_width="@dimen/toolbarbuttons"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:background="@null">
 
-            <Button
+            <ImageButton
                 android:id="@+id/reset"
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/resetwidth"
                 android:layout_height="wrap_content"
                 android:onClick="onClick"
-                android:text="Reset" />
+                android:src="@drawable/reset_button"
+                android:padding="5dp"
+                android:scaleType="fitCenter"
+                android:background="@color/semi_transparent"/>
+
+                <android.support.v7.widget.SwitchCompat
+                android:id="@+id/detectionswitch"
+                android:layout_width="57dp"
+                android:layout_height="match_parent"
+                android:background="@color/semi_transparent"
+                android:checked="true"
+                android:text="Detection"
+                android:theme="@style/detectSwitch"
+                    />
+
+            </LinearLayout>
+
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="@dimen/logotoolbar"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                app:srcCompat="@drawable/logo_reduit" />
 
 
             <ImageView
@@ -56,6 +86,7 @@
 
 
         </android.support.v7.widget.Toolbar>
+
 
 
 

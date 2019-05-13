@@ -2,4 +2,9 @@
 <resources>
     <dimen name="bottom_sheet_corner_radius">15dp</dimen>
     <dimen name="bottom_sheet_top_padding">8dp</dimen>
+
+    <dimen name="toolbarbuttons">130dp</dimen>
+    <dimen name="resetwidth">50dp</dimen>
+    <dimen name="detectionwidth">50dp</dimen>
+    <dimen name="logotoolbar">80dp</dimen>
 </resources>
