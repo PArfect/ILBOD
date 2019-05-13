@@ -31,24 +31,28 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:background="@color/colorPrimarytransparent">
 
             <TextView
                 android:id="@+id/lieu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="Lieu"
-                android:textColor="@android:color/black" />
+                android:text="Lieu trouvé"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/lieu_info"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:gravity="right"
                 android:text="aucun"
-                android:textColor="@android:color/black" />
+                android:layout_marginRight="10dp"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimaryDark" />
         </LinearLayout>
 
     </LinearLayout>

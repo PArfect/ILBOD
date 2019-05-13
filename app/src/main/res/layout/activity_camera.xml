@@ -48,31 +48,44 @@
                 android:orientation="horizontal"
                 android:background="@null">
 
-            <ImageButton
-                android:id="@+id/reset"
-                android:layout_width="@dimen/resetwidth"
-                android:layout_height="wrap_content"
-                android:onClick="onClick"
-                android:src="@drawable/reset_button"
-                android:padding="5dp"
-                android:scaleType="fitCenter"
-                android:background="@color/semi_transparent"/>
+                <ImageButton
+                    android:id="@+id/reset"
+                    android:layout_width="@dimen/resetwidth"
+                    android:layout_height="match_parent"
+                    android:onClick="onClick"
+                    android:src="@drawable/reset_button"
+                    android:padding="10dp"
+                    android:scaleType="fitCenter"
+                    android:background="@color/colorPrimarytransparent"/>
+                <LinearLayout
+                    android:layout_width="@dimen/detectionwidth"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="2dp"
+                    android:orientation="vertical"
+                    android:background="@color/colorPrimarytransparent">
 
-                <android.support.v7.widget.SwitchCompat
-                android:id="@+id/detectionswitch"
-                android:layout_width="57dp"
-                android:layout_height="match_parent"
-                android:background="@color/semi_transparent"
-                android:checked="true"
-                android:text="Detection"
-                android:theme="@style/detectSwitch"
-                    />
+                    <android.support.v7.widget.SwitchCompat
+                        android:id="@+id/detectionswitch"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="1dp"
+                        android:theme="@style/detectSwitch" />
 
-            </LinearLayout>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="10dp"
+                        android:layout_marginLeft="4dp"
+                        android:textColor="@color/colorSecondary"
+                        android:text="Detection" />
+
+                </LinearLayout>
+          </LinearLayout>
 
 
             <ImageView
-                android:id="@+id/imageView2"
                 android:layout_width="@dimen/logotoolbar"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
@@ -82,7 +95,8 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/tfl_logo" />
+                android:src="@drawable/tfl_logo"
+                android:layout_marginRight="8dp"/>
 
 
         </android.support.v7.widget.Toolbar>
