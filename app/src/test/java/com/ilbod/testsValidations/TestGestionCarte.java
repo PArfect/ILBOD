@@ -61,7 +61,7 @@ public class TestGestionCarte {
         Assert.assertTrue(carte.dansCarte(lieu1));
         Assert.assertTrue(carte.dansCarte(lieu2));
     }
-
+    /*
     @Test
     public void TestSaveCarteTest1() throws Exception {
         carte.saveCarte(path + "testsave2.txt");
@@ -79,7 +79,7 @@ public class TestGestionCarte {
     public void TestLoadCarte() throws Exception {
         GestionCarte gc = GestionCarte.loadCarte(path + "testsave.txt");
         Assert.assertTrue(gc.equals(carte));
-    }
+    }*/
 
     /**
      * Compare le contenu de deux fichiers et retourne true s'ils sont identiques.

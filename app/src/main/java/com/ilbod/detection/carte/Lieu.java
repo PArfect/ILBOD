@@ -55,6 +55,7 @@ public class Lieu implements Serializable {
         if (objets.containsValue(objet)) {
             throw new ObjetDejaPresent("L'objet est déjà dans le lieu");
         }
+        objet.addLieu(this);
         objets.put(objet.getNom(),objet);
         assert(invariant());
     }

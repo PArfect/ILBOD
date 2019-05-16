@@ -52,7 +52,7 @@ public class Objet implements Serializable {
         if (lieu == null){
             throw new IllegalArgumentException("le lieu à ajouter ne peut être null.");
         }
-        if (lieux.containsValue(lieu)){
+        if (lieux.containsValue(lieu)) {
             throw new LieuDejaPresent("le lieu est déjà dans la liste des lieux");
         }
         lieux.put(lieu.getNom(),lieu);
