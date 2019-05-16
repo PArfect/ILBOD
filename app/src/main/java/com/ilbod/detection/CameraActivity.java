@@ -20,7 +20,6 @@ import android.Manifest;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.graphics.PorterDuff;
 import android.hardware.Camera;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraCharacteristics;
@@ -49,7 +48,6 @@ import android.view.WindowManager;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -57,9 +55,10 @@ import com.ilbod.detection.env.ImageUtils;
 import com.ilbod.detection.env.Logger;
 
 import java.nio.ByteBuffer;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.ilbod.detection.carte.GestionCarte;
-import com.ilbod.detection.carte.Lieu;
 import com.ilbod.detection.localisation.GestionLocalisation;
 
 public abstract class CameraActivity extends AppCompatActivity
@@ -98,7 +97,8 @@ public abstract class CameraActivity extends AppCompatActivity
   protected GestionLocalisation gestionLoca;
   protected GestionCarte gestionCarte;
   protected SwitchCompat detection;
-  protected TextView noeudAffiche;
+  protected HashMap<String,TextView> noeudsAffiche;
+  protected int occurrenceLieu;
 
   @Override
   protected void onCreate(final Bundle savedInstanceState) {
@@ -109,6 +109,8 @@ public abstract class CameraActivity extends AppCompatActivity
     gestionCarte = new GestionCarte();
     gestionCarte.initCarte();
     gestionLoca = new GestionLocalisation();
+    occurrenceLieu = 0;
+    noeudsAffiche = new HashMap<>();
 
     setContentView(R.layout.activity_camera);
     Toolbar toolbar = findViewById(R.id.toolbar);
@@ -241,8 +243,6 @@ public abstract class CameraActivity extends AppCompatActivity
                 isProcessingFrame = false;
               }
             };
-
-    Log.v("detection",""+detection.isChecked());
 
       processImage();
 
@@ -488,6 +488,14 @@ public abstract class CameraActivity extends AppCompatActivity
     }
   }
 
+  protected void resetNoeudsAffiche(int occurrence){
+    for(HashMap.Entry<String, TextView> noeudAffiche : noeudsAffiche.entrySet()){
+      noeudAffiche.getValue().setVisibility(View.INVISIBLE);
+    }
+    noeudsAffiche = new HashMap<>();
+    occurrenceLieu = occurrence;
+  }
+
   public boolean isDebug() {
     return debug;
   }
@@ -520,16 +528,18 @@ public abstract class CameraActivity extends AppCompatActivity
     else apiSwitchCompat.setText("TFLITE");
   }
 
+
   @Override
   public void onClick(View v) {
     if(v.getId() == R.id.reset){
 
-      gestionLoca.resetObjetsDetectes();
+      gestionLoca.resetLocalisation();
+      resetNoeudsAffiche(0);
       runOnUiThread(
               new Runnable() {
                 @Override
                 public void run() {
-                  showFrameInfo("aucun");
+                  LieuTrouveInfo(String.valueOf(0));
                 }
               });
     }
@@ -537,7 +547,7 @@ public abstract class CameraActivity extends AppCompatActivity
 
 
 
-  protected void showFrameInfo(String frameInfo) {
+  protected void LieuTrouveInfo(String frameInfo) {
     frameValueTextView.setText(frameInfo);
   }
 

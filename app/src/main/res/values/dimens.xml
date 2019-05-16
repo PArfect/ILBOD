@@ -8,6 +8,7 @@
     <dimen name="detectionwidth">50dp</dimen>
     <dimen name="logotoolbar">80dp</dimen>
 
+    <dimen name="carte">400dp</dimen>
     <dimen name="circle">15dp</dimen>
 
 </resources>

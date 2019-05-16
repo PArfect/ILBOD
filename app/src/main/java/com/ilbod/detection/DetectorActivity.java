@@ -32,6 +32,7 @@ import android.util.Log;
 import android.util.Size;
 import android.util.TypedValue;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ilbod.detection.customview.OverlayView;
@@ -39,15 +40,16 @@ import com.ilbod.detection.customview.OverlayView.DrawCallback;
 import com.ilbod.detection.env.BorderedText;
 import com.ilbod.detection.env.ImageUtils;
 import com.ilbod.detection.env.Logger;
+import com.ilbod.detection.localisation.LieuProba;
 import com.ilbod.detection.tflite.Classifier;
 import com.ilbod.detection.tflite.TFLiteObjectDetectionAPIModel;
 import org.tensorflow.demo.tracking.MultiBoxTracker;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.ilbod.detection.carte.Lieu;
 import com.ilbod.detection.carte.Objet;
 
 /**
@@ -172,19 +174,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
 
     // No mutex needed as this method is not reentrant.
     if (computingDetection || !(detection.isChecked())) {
-      runOnUiThread(
-              new Runnable() {
-                @Override
-                public void run() {
 
-
-                  if(gestionLoca.getLieuTrouveUpdated()){
-                    showFrameInfo(gestionLoca.getLieuTrouve().getNom());
-                    afficheLocalisation(gestionLoca.getLieuTrouve());
-                    gestionLoca.setLieuTrouveUpdatedFalse();
-                  }
-                }
-              });
       readyForNextImage();
       return;
     }
@@ -236,12 +226,13 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
 
                     if (location != null && result.getConfidence() >= minimumConfidence) {
                       canvas.drawRect(location, paint);
-
-                      Objet obj = gestionCarte.objetsExistants.get(result.getTitle());
-                      if (obj != null){
-                        gestionLoca.ajoutObjetDetecte(obj);
+                      String nom = result.getTitle();
+                      if(!(gestionLoca.getObjetsDejaDetectes().containsKey(nom))) {
+                        Objet obj = gestionCarte.objetsExistants.get(nom);
+                        if (obj != null) {
+                          gestionLoca.ajoutObjetDetecte(obj);
+                        }
                       }
-
                       cropToFrameTransform.mapRect(location);
 
                       result.setLocation(location);
@@ -264,9 +255,10 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                             public void run() {
 
                               if(gestionLoca.getLieuTrouveUpdated()){
-                                showFrameInfo(gestionLoca.getLieuTrouve().getNom());
-                                afficheLocalisation(gestionLoca.getLieuTrouve());
+
+                                affichageLocalisations();
                                 gestionLoca.setLieuTrouveUpdatedFalse();
+                                LieuTrouveInfo(String.valueOf(noeudsAffiche.size()));
                               }
                             }
                           });
@@ -275,18 +267,41 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
 
   }
 
+  /**
+   * Affichage des lieux les plus probables sur la carte.
+   */
+  private void affichageLocalisations(){
+    ArrayList<LieuProba> lieuxProbables = gestionLoca.getLieuxProbables();
+    if(lieuxProbables.size()!=0) {
+      int max = lieuxProbables.get(0).getOccurrence();
+      if (occurrenceLieu != max) {
+        resetNoeudsAffiche(max);
+      }
+      for (LieuProba lieu : gestionLoca.getLieuxProbables()) {
+        if (lieu.getOccurrence() != max) {
+          return;
+        }
+        afficheLocalisation(lieu);
 
+      }
 
-  private void afficheLocalisation(final Lieu lieu){
-    Context context = getApplicationContext();
-    int id = context.getResources().getIdentifier(lieu.getNom(),"id", context.getPackageName());
-    if(noeudAffiche != null){
-      noeudAffiche.setVisibility(View.INVISIBLE);
     }
-    noeudAffiche = findViewById(id);
-    if(noeudAffiche != null){
-      noeudAffiche.setVisibility(View.VISIBLE);
+
+  }
+  /**
+   * Affichage d'un point correspondant à un lieu sur la carte.
+   * @param lieu
+   */
+  private void afficheLocalisation(final LieuProba lieu){
+    String nom = lieu.getLieu().getNom();
+    if(!(noeudsAffiche.containsKey(nom))){
+      Context context = getApplicationContext();
+      int id = context.getResources().getIdentifier(lieu.getLieu().getNom(),"id", context.getPackageName());
+
+      noeudsAffiche.put(nom,findViewById(id));
+      noeudsAffiche.get(nom).setVisibility(View.VISIBLE);
     }
+
 
   }
 
