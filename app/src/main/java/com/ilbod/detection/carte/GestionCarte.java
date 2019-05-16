@@ -1,5 +1,15 @@
 package com.ilbod.detection.carte;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.nio.ByteBuffer;
+import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -9,8 +19,12 @@ import com.ilbod.detection.Exception.NoeudDejaPresent;
 /**
  * Classe permettant de gérer les différentes fonctionnalités s'appliquant la carte virtuelle.
  */
-public class GestionCarte {
+public class GestionCarte implements Serializable {
 
+    /**
+     * Serialisation.
+     */
+    private static final long serialVersionUID = 1L;
     /**
      *Noeud de référence de la carte.
      */
@@ -94,7 +108,7 @@ public class GestionCarte {
 
         while (!lieuxAVisiter.isEmpty()) {
 
-            if (lieu == visited.getLieu()) {
+            if (lieu.getNom().equals(visited.getLieu().getNom())) {
                 return true;
             }
             lieuxVisites.add(visited);
@@ -311,8 +325,67 @@ public class GestionCarte {
         addObjet("oven");
         addObjet("refrigerator");
 
-
-
     }
 
+    public void saveCarte(String fileName) throws IOException {
+        memoire = racine;
+        courant = racine;
+
+        ByteArrayOutputStream bo = new ByteArrayOutputStream();
+        ObjectOutputStream oo = new ObjectOutputStream(bo);
+        oo.writeObject(this);
+        oo.close();
+
+        ByteBuffer buffer = ByteBuffer.allocate(bo.size());
+        buffer.put(bo.toByteArray());
+        buffer.flip();
+        bo.close();
+
+        FileOutputStream fout = new FileOutputStream(fileName);
+        FileChannel fcout =  fout.getChannel();
+
+        ByteBuffer intBuffer = ByteBuffer.allocate(Integer.SIZE/Byte.SIZE);
+        intBuffer.putInt(bo.size());
+        intBuffer.flip();
+
+        fcout.write(intBuffer);
+        fcout.write(buffer);
+        fcout.close();
+        fout.close();
+        oo.close();
+    }
+
+    public static GestionCarte loadCarte(String fileName) throws IOException, ClassNotFoundException {
+        FileInputStream fin = new FileInputStream(fileName);
+        FileChannel fcin = fin.getChannel();
+        ByteBuffer intBuffer = ByteBuffer.allocate(Integer.SIZE/Byte.SIZE);
+        fcin.read(intBuffer);
+        intBuffer.flip();
+        int sizeObject = intBuffer.getInt();
+
+        ByteBuffer buffer = ByteBuffer.allocate(sizeObject);
+        fcin.read(buffer);
+        buffer.flip();
+        fcin.close();
+        fin.close();
+
+        ByteArrayInputStream bi = new ByteArrayInputStream(buffer.array());
+        ObjectInputStream oi = new ObjectInputStream(bi);
+
+        GestionCarte carte = (GestionCarte) oi.readObject();
+        oi.close();
+        bi.close();
+        return carte;
+    }
+
+
+    @Override
+    public String toString() {
+        return "GestionCarte{" +
+                "racine=" + racine +
+                ", courant=" + courant +
+                ", memoire=" + memoire +
+                ", objetsExistants=" + objetsExistants +
+                '}';
+    }
 }

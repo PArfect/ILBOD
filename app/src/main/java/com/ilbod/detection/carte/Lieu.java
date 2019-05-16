@@ -3,6 +3,7 @@ package com.ilbod.detection.carte;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Objects;
 
@@ -13,7 +14,11 @@ import com.ilbod.detection.Exception.ObjetDejaPresent;
  * Classe référençant un lieu.
  * @author Arthur Oulmi
  */
-public class Lieu {
+public class Lieu implements Serializable {
+    /**
+     * Serialisation.
+     */
+    private static final long serialVersionUID = 1L;
     /**
      * Nom du lieu.
      **/
