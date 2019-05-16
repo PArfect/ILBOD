@@ -1,7 +1,10 @@
 package com.ilbod.detection.localisation;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Objects;
 
@@ -13,9 +16,14 @@ import com.ilbod.detection.carte.Objet;
  */
 public class GestionLocalisation {
     /**
-     * Gestionnaire de la détection des objets.
+     * Liste des objets en cours de détection.
      */
     private HashMap<String, Objet> objetsDetectes;
+
+    /**
+     * Liste des objets déjà détectés.
+     */
+    private HashMap<String, Objet> objetsDejaDetectes;
 
     /**
      * Lieux probables de la localisation courante.
@@ -25,15 +33,17 @@ public class GestionLocalisation {
     /**
      * Lieu détecté par l'application.
      */
-    private Lieu lieuTrouve;
+    private LieuProba lieuTrouve;
     /**
      * Booléen qui permet de savoir si lieuTrouve a ete mis  jour
      */
     private boolean lieuTrouveUpdated;
 
     public GestionLocalisation(){
-        lieuTrouve = new Lieu("aucun");
+        Lieu lieu = new Lieu("aucun");
+        lieuTrouve = new LieuProba(lieu);
         objetsDetectes = new HashMap<String, Objet>();
+        objetsDejaDetectes = new HashMap<String, Objet>();
         lieuxProbables = new ArrayList<>();
         lieuTrouveUpdated = false;
 
@@ -41,15 +51,21 @@ public class GestionLocalisation {
     }
 
     public void resetLocalisation(){
+        objetsDejaDetectes = new HashMap<String, Objet>();
         objetsDetectes = new HashMap<String, Objet>();
         lieuxProbables = new ArrayList<>();
-        lieuTrouve = new Lieu("aucun");
+        Lieu lieu = new Lieu("aucun");
+        lieuTrouve = new LieuProba(lieu);
         lieuTrouveUpdated = true;
 
         assert(invariant());
     }
 
     public void ajoutObjetDetecte(Objet objet){
+        if(objet == null){
+            throw new IllegalArgumentException("L'objet detecté ne peut être null");
+        }
+
         objetsDetectes.put(objet.getNom(),objet);
     }
 
@@ -57,7 +73,6 @@ public class GestionLocalisation {
      * Met à jour la liste des lieux probables selon les objets détectés.
      */
     public void miseAJourLieuxProbables(){
-
         Objects.requireNonNull(lieuxProbables,"La liste des objets détectées ne peut être nulle");
         Objects.requireNonNull(objetsDetectes,"La liste des lieux probables ne peut être nulle");
 
@@ -66,30 +81,38 @@ public class GestionLocalisation {
         int indice; //Position du lieu où se trouve un objet détecté.
         int newindice; //Nouvelle position du lieu après incrémentation de son occurrence.
 
-        for (Map.Entry<String, Objet> objet : objetsDetectes.entrySet()){
+        Iterator<Map.Entry<String,Objet>> it = objetsDetectes.entrySet().iterator();
+
+        while(it.hasNext()){
+            Map.Entry<String,Objet> objet = it.next();
             lieux = objet.getValue().getLieux();
             for (Map.Entry<String, Lieu> lieu : lieux.entrySet()){
 
                 lieutrouve = new LieuProba(lieu.getValue());
                 indice = lieuxProbables.indexOf(lieutrouve);
-                newindice = 0;
 
                 if (indice == -1){
                     lieuxProbables.add(lieutrouve);
                 }
                 else{
-                    lieutrouve= lieuxProbables.remove(indice);
+                    lieutrouve= lieuxProbables.remove(indice); //On le repositionne au bon endroit pour que la liste reste triée
                     lieutrouve.incrementOccurrence();
-                    for(newindice = indice - 1;
-                        (newindice!=0) && (lieuxProbables.get(newindice).getOccurrence()<lieutrouve.getOccurrence());
+                    for(newindice = indice-1;
+                        (newindice>0) && (lieuxProbables.get(newindice).getOccurrence()<lieutrouve.getOccurrence());
                         newindice--){
                     }
-                    lieuxProbables.add(newindice,lieutrouve);
+                    if(newindice>0){
+                        lieuxProbables.add(newindice,lieutrouve);
+                    }
+                    else{
+                        lieuxProbables.add(0,lieutrouve);
+                    }
                 }
 
             }
+            objetsDejaDetectes.put(objet.getKey(),objet.getValue());
+            it.remove();
         }
-
         assert(invariant());
 
     }
@@ -107,14 +130,14 @@ public class GestionLocalisation {
                 }
             }
 
-            lieuTrouve = max.getLieu();
+            lieuTrouve = max;
             lieuTrouveUpdated = true;
         }
 
         assert(invariant());
     }
 
-    public Lieu getLieuTrouve(){ return lieuTrouve; }
+    public LieuProba getLieuTrouve(){ return lieuTrouve; }
 
     public boolean getLieuTrouveUpdated() {return lieuTrouveUpdated;}
 
@@ -122,8 +145,9 @@ public class GestionLocalisation {
 
     public ArrayList<LieuProba> getLieuxProbables() {return lieuxProbables;}
 
+    public HashMap<String, Objet> getObjetsDejaDetectes() {return objetsDejaDetectes;}
+
     public void setLieuTrouveUpdatedFalse() { lieuTrouveUpdated = false;}
-    
 
     private boolean invariant(){
         return lieuxProbables != null && objetsDetectes != null && lieuTrouve != null;

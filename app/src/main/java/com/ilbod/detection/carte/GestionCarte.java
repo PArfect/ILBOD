@@ -324,7 +324,6 @@ public class GestionCarte implements Serializable {
         moveDevant();
         assert(courant.getLieu().getNom()=="F1");
         addObjet("oven");
-        addObjet("refrigerator");
 
     }
 
