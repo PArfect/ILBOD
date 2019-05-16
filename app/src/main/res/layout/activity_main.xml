@@ -58,27 +58,28 @@
 
         <ImageView
             android:id="@+id/imageView5"
-            android:layout_width="79dp"
-            android:layout_height="107dp"
-            android:layout_marginStart="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="5dp"
+            android:padding="5dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/logo_tsp" />
 
         <ImageView
             android:id="@+id/imageView3"
-            android:layout_width="105dp"
-            android:layout_height="106dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:padding="5dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/logo_cassiopee" />
 
         <ImageView
             android:id="@+id/imageView6"
-            android:layout_width="182dp"
-            android:layout_height="107dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginRight="16dp"
-            android:layout_weight="1"
             app:srcCompat="@drawable/tfl_logo" />
 
 

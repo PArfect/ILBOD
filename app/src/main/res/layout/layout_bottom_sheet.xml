@@ -59,10 +59,6 @@
         </LinearLayout>
 
 
-        <include
-            app:layout_constraintStart_toStartOf="parent"
-            android:id="@+id/layout_carte"
-            layout="@layout/layout_carte" />
 
     </LinearLayout>
 
@@ -74,6 +70,10 @@
         android:background="@android:color/darker_gray" />
 
 
+    <include
+        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/layout_carte"
+        layout="@layout/layout_carte" />
 
     <View
         android:layout_width="match_parent"
