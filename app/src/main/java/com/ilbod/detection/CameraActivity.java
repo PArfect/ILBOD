@@ -59,6 +59,7 @@ import com.ilbod.detection.env.Logger;
 import java.nio.ByteBuffer;
 
 import com.ilbod.detection.carte.GestionCarte;
+import com.ilbod.detection.carte.Lieu;
 import com.ilbod.detection.localisation.GestionLocalisation;
 
 public abstract class CameraActivity extends AppCompatActivity
@@ -66,6 +67,8 @@ public abstract class CameraActivity extends AppCompatActivity
         Camera.PreviewCallback,
         CompoundButton.OnCheckedChangeListener,
         View.OnClickListener {
+
+
   private static final Logger LOGGER = new Logger();
 
   private static final int PERMISSIONS_REQUEST = 1;
@@ -91,9 +94,11 @@ public abstract class CameraActivity extends AppCompatActivity
   protected TextView frameValueTextView, cropValueTextView, inferenceTimeTextView;
   protected ImageView bottomSheetArrowImageView;
   private SwitchCompat apiSwitchCompat;
+
   protected GestionLocalisation gestionLoca;
   protected GestionCarte gestionCarte;
   protected SwitchCompat detection;
+  protected TextView noeudAffiche;
 
   @Override
   protected void onCreate(final Bundle savedInstanceState) {
@@ -104,7 +109,6 @@ public abstract class CameraActivity extends AppCompatActivity
     gestionCarte = new GestionCarte();
     gestionCarte.initCarte();
     gestionLoca = new GestionLocalisation();
-
 
     setContentView(R.layout.activity_camera);
     Toolbar toolbar = findViewById(R.id.toolbar);
@@ -239,6 +243,7 @@ public abstract class CameraActivity extends AppCompatActivity
             };
 
     Log.v("detection",""+detection.isChecked());
+
       processImage();
 
   }
@@ -264,6 +269,8 @@ public abstract class CameraActivity extends AppCompatActivity
         image.close();
         return;
       }
+
+
       isProcessingFrame = true;
       Trace.beginSection("imageAvailable");
       final Plane[] planes = image.getPlanes();
@@ -305,6 +312,7 @@ public abstract class CameraActivity extends AppCompatActivity
     }
     Trace.endSection();
   }
+
 
   @Override
   public synchronized void onStart() {
@@ -527,6 +535,8 @@ public abstract class CameraActivity extends AppCompatActivity
     }
   }
 
+
+
   protected void showFrameInfo(String frameInfo) {
     frameValueTextView.setText(frameInfo);
   }
@@ -538,6 +548,9 @@ public abstract class CameraActivity extends AppCompatActivity
   protected void showInference(String inferenceTime) {
     inferenceTimeTextView.setText(inferenceTime);
   }
+
+
+
 
   protected abstract void processImage();
 

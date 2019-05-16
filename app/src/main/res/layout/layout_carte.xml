@@ -9,10 +9,7 @@
     <android.support.constraint.ConstraintLayout
         android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0">
+        android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/carte"
@@ -21,7 +18,7 @@
             android:src="@drawable/cartereduit2"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintHorizontal_bias="0.454"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -33,6 +30,7 @@
             android:layout_height="4dp"
             android:layout_marginBottom="100dp"
             android:background="@color/colorPrimary"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="@+id/carte"
             app:layout_constraintEnd_toStartOf="@+id/F1"
             app:layout_constraintHorizontal_bias="0.0"
@@ -45,6 +43,7 @@
             android:layout_width="0dp"
             android:layout_height="4dp"
             android:background="@color/colorPrimary"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="@+id/carte"
             app:layout_constraintEnd_toStartOf="@+id/F3"
             app:layout_constraintHorizontal_bias="1.0"

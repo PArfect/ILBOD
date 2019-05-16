@@ -314,14 +314,14 @@ public class GestionCarte implements Serializable {
 
     public void initCarte(){
 
-        createNoeudDevant(new Lieu("cuisine"));
-        createNoeudDerriere(new Lieu("salon"));
+        createNoeudDevant(new Lieu("F1"));
+        createNoeudDerriere(new Lieu("F2"));
         moveDerriere();
-        assert(courant.getLieu().getNom()=="salon");
+        assert(courant.getLieu().getNom()=="F2");
         addObjet("chair");
         moveDevant();
         moveDevant();
-        assert(courant.getLieu().getNom()=="cuisine");
+        assert(courant.getLieu().getNom()=="F1");
         addObjet("oven");
         addObjet("refrigerator");
 

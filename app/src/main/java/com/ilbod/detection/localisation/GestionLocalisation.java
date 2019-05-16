@@ -21,18 +21,30 @@ public class GestionLocalisation {
      */
     private ArrayList<LieuProba> lieuxprobables;
 
+    /**
+     * Lieu détecté par l'application.
+     */
+    private Lieu lieuTrouve;
+    /**
+     * Booléen qui permet de savoir si lieuTrouve a ete mis  jour
+     */
+    private boolean lieuTrouveUpdated;
 
     public GestionLocalisation(){
+        lieuTrouve = new Lieu("aucun");
         objetsDetectes = new HashMap<String, Objet>();
         lieuxprobables = new ArrayList<>();
+        lieuTrouveUpdated = false;
     }
 
     public void resetObjetsDetectes(){
-        this.objetsDetectes = new HashMap<String, Objet>();
+        objetsDetectes = new HashMap<String, Objet>();
+        lieuTrouve = new Lieu("aucun");
+        lieuTrouveUpdated = true;
     }
 
     public void ajoutObjetDetecte(Objet objet){
-        this.objetsDetectes.put(objet.getNom(),objet);
+        objetsDetectes.put(objet.getNom(),objet);
     }
 
     /**
@@ -64,16 +76,10 @@ public class GestionLocalisation {
 
     }
 
-
-    public ArrayList<LieuProba> getLieuxprobables(){
-        return lieuxprobables;
-    }
-
-    public HashMap<String, Objet> getObjetsDetectes(){
-        return objetsDetectes;
-    }
-
-    public Lieu lieuPlusProbable(){
+    /**
+     * Recherche du lieu le plus probable (celui avec le plus d'objets reconnus)
+     */
+     public void lieuPlusProbable(){
         if(lieuxprobables.size()!=0){
             LieuProba max = lieuxprobables.get(0);
 
@@ -83,11 +89,15 @@ public class GestionLocalisation {
                 }
             }
 
-            return max.getLieu();
-        }
-        else{
-            return new Lieu("aucun");
+            lieuTrouve = max.getLieu();
+            lieuTrouveUpdated = true;
         }
     }
+
+    public Lieu getLieuTrouve(){ return lieuTrouve; }
+
+    public boolean getLieuTrouveUpdated() {return lieuTrouveUpdated;}
+
+    public void setLieuTrouveUpdatedFalse() { lieuTrouveUpdated = false;}
 
 }

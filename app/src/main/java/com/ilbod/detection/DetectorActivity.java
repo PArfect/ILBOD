@@ -16,6 +16,7 @@
 
 package com.ilbod.detection;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.graphics.Canvas;
@@ -30,6 +31,7 @@ import android.os.SystemClock;
 import android.util.Log;
 import android.util.Size;
 import android.util.TypedValue;
+import android.view.View;
 import android.widget.Toast;
 
 import com.ilbod.detection.customview.OverlayView;
@@ -167,8 +169,22 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
             timestamp);
     trackingOverlay.postInvalidate();
 
+
     // No mutex needed as this method is not reentrant.
     if (computingDetection || !(detection.isChecked())) {
+      runOnUiThread(
+              new Runnable() {
+                @Override
+                public void run() {
+
+
+                  if(gestionLoca.getLieuTrouveUpdated()){
+                    showFrameInfo(gestionLoca.getLieuTrouve().getNom());
+                    afficheLocalisation(gestionLoca.getLieuTrouve());
+                    gestionLoca.setLieuTrouveUpdatedFalse();
+                  }
+                }
+              });
       readyForNextImage();
       return;
     }
@@ -189,6 +205,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
     if (SAVE_PREVIEW_BITMAP) {
       ImageUtils.saveBitmap(croppedBitmap);
     }
+
     runInBackground(
               new Runnable() {
                 @Override
@@ -238,20 +255,41 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
 
                   computingDetection = false;
 
-                  Lieu lieuTrouve = gestionLoca.lieuPlusProbable();
+                  gestionLoca.lieuPlusProbable();
+
 
                   runOnUiThread(
                           new Runnable() {
                             @Override
                             public void run() {
-                              showFrameInfo(lieuTrouve.getNom());
+
+                              if(gestionLoca.getLieuTrouveUpdated()){
+                                showFrameInfo(gestionLoca.getLieuTrouve().getNom());
+                                afficheLocalisation(gestionLoca.getLieuTrouve());
+                                gestionLoca.setLieuTrouveUpdatedFalse();
+                              }
                             }
                           });
                 }
               });
 
+  }
+
+
+
+  private void afficheLocalisation(final Lieu lieu){
+    Context context = getApplicationContext();
+    int id = context.getResources().getIdentifier(lieu.getNom(),"id", context.getPackageName());
+    if(noeudAffiche != null){
+      noeudAffiche.setVisibility(View.INVISIBLE);
+    }
+    noeudAffiche = findViewById(id);
+    if(noeudAffiche != null){
+      noeudAffiche.setVisibility(View.VISIBLE);
+    }
 
   }
+
 
   @Override
   protected int getLayoutId() {
