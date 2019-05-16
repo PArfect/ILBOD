@@ -20,7 +20,6 @@ import android.Manifest;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.graphics.PorterDuff;
 import android.hardware.Camera;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraCharacteristics;
@@ -49,7 +48,6 @@ import android.view.WindowManager;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -59,7 +57,6 @@ import com.ilbod.detection.env.Logger;
 import java.nio.ByteBuffer;
 
 import com.ilbod.detection.carte.GestionCarte;
-import com.ilbod.detection.carte.Lieu;
 import com.ilbod.detection.localisation.GestionLocalisation;
 
 public abstract class CameraActivity extends AppCompatActivity
@@ -524,7 +521,7 @@ public abstract class CameraActivity extends AppCompatActivity
   public void onClick(View v) {
     if(v.getId() == R.id.reset){
 
-      gestionLoca.resetObjetsDetectes();
+      gestionLoca.resetLocalisation();
       runOnUiThread(
               new Runnable() {
                 @Override
