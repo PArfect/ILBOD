@@ -54,7 +54,8 @@ public class GestionLocalisation {
         lieuxprobables = new ArrayList<>();
 
         HashMap<String, Lieu> lieux = null;
-        int indice;
+        int indice; //Position du lieu où se trouve un objet detecté.
+        int newindice; //Nouvelle position du lieu après incrémentation de son occurrence.
         LieuProba lieutrouve = null;
 
         for (Map.Entry<String, Objet> objet : objetsDetectes.entrySet()){
@@ -63,12 +64,19 @@ public class GestionLocalisation {
 
                 lieutrouve = new LieuProba(lieu.getValue());
                 indice = lieuxprobables.indexOf(lieutrouve);
+                newindice = 0;
 
                 if (indice == -1){
                     lieuxprobables.add(lieutrouve);
                 }
                 else{
-                    lieuxprobables.get(indice).incrementOccurrence();
+                    lieutrouve= lieuxprobables.remove(indice);
+                    lieutrouve.incrementOccurrence();
+                    for(newindice = indice - 1;
+                        (newindice!=0) && (lieuxprobables.get(newindice).getOccurrence()<lieutrouve.getOccurrence());
+                        newindice--){
+                    }
+                    lieuxprobables.add(newindice,lieutrouve);
                 }
 
             }
