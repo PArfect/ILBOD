@@ -3,6 +3,7 @@ package com.ilbod.detection.carte;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Objects;
 
@@ -13,8 +14,11 @@ import com.ilbod.detection.Exception.LieuDejaPresent;
  * Classe référençant un objet détectable.
  * @author Arthur Oulmi
  */
-public class Objet {
-
+public class Objet implements Serializable {
+    /**
+     * Serialisation.
+     */
+    private static final long serialVersionUID = 1L;
     /**
      * Nom de l'objet
      */

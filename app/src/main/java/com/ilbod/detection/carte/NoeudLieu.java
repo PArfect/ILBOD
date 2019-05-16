@@ -2,15 +2,21 @@ package com.ilbod.detection.carte;
 
 import com.ilbod.detection.Exception.MemeLieu;
 
+import java.io.Serializable;
+
 /**
  * Classe représentant les noeuds dans le graphe de la carte du bâtiment.
  */
-public class NoeudLieu {
+public class NoeudLieu implements Serializable {
     private Lieu lieu;
     private NoeudLieu devant;
     private NoeudLieu derriere;
     private NoeudLieu droite;
     private NoeudLieu gauche;
+    /**
+     * Serialisation.
+     */
+    private static final long serialVersionUID = 1L;
 
     /**
      * Construit un noeud de la carte virtuelle.
