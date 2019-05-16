@@ -2,9 +2,9 @@ package com.ilbod.testsUnitaires;
 
 import org.junit.Test;
 import org.junit.Assert;
-import carte.NoeudLieu;
-import carte.Lieu;
-import Exception.MemeLieu;
+import com.ilbod.detection.carte.NoeudLieu;
+import com.ilbod.detection.carte.Lieu;
+import com.ilbod.detection.Exception.MemeLieu;
 
 
 public class TestNoeudLieu {

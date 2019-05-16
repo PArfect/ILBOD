@@ -3,10 +3,10 @@ package com.ilbod.testsUnitaires;
 import org.junit.Test;
 import org.junit.Assert;
 
-import carte.Lieu;
-import carte.Objet;
-import Exception.ChaineDeCaractereNullOuVide;
-import Exception.LieuDejaPresent;
+import com.ilbod.detection.carte.Lieu;
+import com.ilbod.detection.carte.Objet;
+import com.ilbod.detection.Exception.ChaineDeCaractereNullOuVide;
+import com.ilbod.detection.Exception.LieuDejaPresent;
 
 
 public class TestObjet {
