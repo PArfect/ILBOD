@@ -12,6 +12,7 @@ import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 
 import com.ilbod.detection.Exception.LieuDejaPresent;
 import com.ilbod.detection.Exception.NoeudDejaPresent;
@@ -98,7 +99,7 @@ public class GestionCarte implements Serializable {
      */
     public boolean dansCarte(final Lieu lieu) {
         if (lieu == null) {
-            throw new IllegalArgumentException("Le noeud ne peut pas être null");
+            throw new IllegalArgumentException("Le lieu ne peut pas être null");
         }
 
         ArrayList<NoeudLieu> lieuxVisites = new ArrayList<NoeudLieu>();
@@ -378,6 +379,20 @@ public class GestionCarte implements Serializable {
         return carte;
     }
 
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        GestionCarte that = (GestionCarte) o;
+        return Objects.equals(racine, that.racine) &&
+                Objects.equals(objetsExistants, that.objetsExistants);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(racine, objetsExistants);
+    }
 
     @Override
     public String toString() {
