@@ -55,6 +55,22 @@ public class Lieu implements Serializable {
         if (objets.containsValue(objet)) {
             throw new ObjetDejaPresent("L'objet est déjà dans le lieu");
         }
+        objets.put(objet.getNom(),objet);
+        assert(invariant());
+    }
+
+    /**
+     * Ajoute un objet au dictionnaire d'objet, tout en ajoutant le lieu à l'objet.
+     * @param objet objet à ajouter au lieu
+     **/
+    public void addObjetRecursive(Objet objet) throws ObjetDejaPresent {
+
+        if (objet == null){
+            throw new IllegalArgumentException("L'objet à ajouter ne peut être null.");
+        }
+        if (objets.containsValue(objet)) {
+            throw new ObjetDejaPresent("L'objet est déjà dans le lieu");
+        }
         objet.addLieu(this);
         objets.put(objet.getNom(),objet);
         assert(invariant());

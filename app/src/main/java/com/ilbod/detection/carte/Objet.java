@@ -60,6 +60,23 @@ public class Objet implements Serializable {
     }
 
     /**
+     * Ajoute un lieu referençant l'objet, en ajoutant l'objet au lieu.
+     * @param lieu lieu à ajouter
+     */
+    public void addLieuRecursive(Lieu lieu) throws LieuDejaPresent {
+
+        if (lieu == null){
+            throw new IllegalArgumentException("le lieu à ajouter ne peut être null.");
+        }
+        if (lieux.containsValue(lieu)) {
+            throw new LieuDejaPresent("le lieu est déjà dans la liste des lieux");
+        }
+        lieu.addObjet(this);
+        lieux.put(lieu.getNom(),lieu);
+        assert(invariant());
+    }
+
+    /**
      * Getter nom.
      * @return nom de l'objet
      **/

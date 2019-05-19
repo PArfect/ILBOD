@@ -57,6 +57,20 @@ public class GestionCarte implements Serializable {
     }
 
     /**
+     * Ajoute un objet à la map
+     */
+    public void addObjectMap(Objet objet) {
+        objetsExistants.put(objet.getNom(),objet);
+    }
+
+    /**
+     * Change le lieu d'origine
+     */
+    public void setOrigine(Lieu lieu) {
+        racine = new NoeudLieu(lieu);
+    }
+
+    /**
      * Deplace le noeud courant à droite.
      */
     public void moveDroite() {
@@ -219,7 +233,7 @@ public class GestionCarte implements Serializable {
     }
 
     /**
-     * Ajoute un lien à droite du noeud courant et donc à gauche du noeud en argument
+     * Ajoute un lien à droite du noeud courant et donc à gauche du noeud en memoire
      */
     public void creerLienDroite() {
         NoeudLieu node = memoire;
@@ -237,25 +251,25 @@ public class GestionCarte implements Serializable {
     }
 
     /**
-     * Ajoute un lien à gauche du noeud courant et donc à droite du noeud en argument
+     * Ajoute un lien à gauche du noeud courant et donc à droite du noeud en memoire
      */
     public void creerLienGauche() {
         NoeudLieu node = memoire;
         if (node == null) {
             throw new IllegalArgumentException("Le noeud ne peut pas être null");
         }
-        if (courant.getDroite() != null) {
-            throw new NoeudDejaPresent("le noeud gauche existe déjà");
+        if (node.getDroite() != null) {
+            throw new NoeudDejaPresent("le noeud droit existe déjà");
         }
-        if (node.getGauche() != null) {
-            throw new NoeudDejaPresent("le noeud droite existe déjà");
+        if (courant.getGauche() != null) {
+            throw new NoeudDejaPresent("le noeud gaucheexiste déjà");
         }
         courant.ajouterGauche(node);
         node.ajouterDroite(courant);
     }
 
     /**
-     * Ajoute un lien devant le noeud courant et donc derriere le noeud en argument
+     * Ajoute un lien devant le noeud courant et donc derriere le noeud en memoire
      */
     public void creerLienDevant() {
         NoeudLieu node = memoire;
@@ -273,7 +287,7 @@ public class GestionCarte implements Serializable {
     }
 
     /**
-     * Ajoute un lien derriere le noeud courant et donc devant le noeud en argument
+     * Ajoute un lien derriere le noeud courant et donc devant le noeud en memoire
      */
     public void creerLienDerriere() {
         NoeudLieu node = memoire;
