@@ -31,7 +31,6 @@
             android:id="@+id/F1F2"
             android:layout_width="0dp"
             android:layout_height="8dp"
-            android:layout_marginBottom="100dp"
             android:background="@color/colorPrimary"
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="@+id/carte"
@@ -39,7 +38,7 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/F2"
             app:layout_constraintTop_toTopOf="@+id/carte"
-            app:layout_constraintVertical_bias="0.866" />
+            app:layout_constraintVertical_bias="0.745" />
 
         <View
             android:id="@+id/F2F3"
@@ -61,9 +60,321 @@
             android:background="@color/colorPrimary"
             android:visibility="visible"
             app:layout_constraintBottom_toTopOf="@+id/F2"
+            app:layout_constraintEnd_toEndOf="@+id/carte"
+            app:layout_constraintHorizontal_bias="0.229"
+            app:layout_constraintStart_toStartOf="@+id/carte"
             app:layout_constraintTop_toBottomOf="@+id/B1"
-            app:layout_constraintVertical_bias="0.0"
-            tools:layout_editor_absoluteX="94dp" />
+            app:layout_constraintVertical_bias="0.0" />
+        <View
+            android:id="@+id/B1B2"
+            android:layout_width="8dp"
+            android:layout_height="0dp"
+            android:background="@color/colorPrimary"
+            android:visibility="visible"
+            app:layout_constraintBottom_toTopOf="@+id/B1"
+            app:layout_constraintEnd_toEndOf="@+id/carte"
+            app:layout_constraintHorizontal_bias="0.229"
+            app:layout_constraintStart_toStartOf="@+id/carte"
+            app:layout_constraintTop_toBottomOf="@+id/B2"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <View
+            android:id="@+id/B2B3"
+            android:layout_width="8dp"
+            android:layout_height="0dp"
+            android:background="@color/colorPrimary"
+            android:visibility="visible"
+            app:layout_constraintBottom_toTopOf="@+id/B2"
+            app:layout_constraintEnd_toEndOf="@+id/carte"
+            app:layout_constraintHorizontal_bias="0.229"
+            app:layout_constraintStart_toStartOf="@+id/carte"
+            app:layout_constraintTop_toBottomOf="@+id/B3"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <View
+            android:id="@+id/B3B4"
+            android:layout_width="8dp"
+            android:layout_height="0dp"
+            android:background="@color/colorPrimary"
+            android:visibility="visible"
+            app:layout_constraintBottom_toTopOf="@+id/B3"
+            app:layout_constraintEnd_toEndOf="@+id/carte"
+            app:layout_constraintHorizontal_bias="0.229"
+            app:layout_constraintStart_toStartOf="@+id/carte"
+            app:layout_constraintTop_toBottomOf="@+id/B4"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <View
+            android:id="@+id/B4B5"
+            android:layout_width="8dp"
+            android:layout_height="0dp"
+            android:background="@color/colorPrimary"
+            android:visibility="visible"
+            app:layout_constraintBottom_toTopOf="@+id/B4"
+            app:layout_constraintEnd_toEndOf="@+id/carte"
+            app:layout_constraintHorizontal_bias="0.229"
+            app:layout_constraintStart_toStartOf="@+id/carte"
+            app:layout_constraintTop_toBottomOf="@+id/B5"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <View
+            android:id="@+id/B5B6"
+            android:layout_width="8dp"
+            android:layout_height="0dp"
+            android:background="@color/colorPrimary"
+            android:visibility="visible"
+            app:layout_constraintBottom_toTopOf="@+id/B5"
+            app:layout_constraintEnd_toEndOf="@+id/carte"
+            app:layout_constraintHorizontal_bias="0.229"
+            app:layout_constraintStart_toStartOf="@+id/carte"
+            app:layout_constraintTop_toBottomOf="@+id/B6"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <View
+            android:id="@+id/B6D1"
+            android:layout_width="0dp"
+            android:layout_height="8dp"
+            android:background="@color/colorPrimary"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/carte"
+            app:layout_constraintEnd_toStartOf="@+id/D1"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/B6"
+            app:layout_constraintTop_toTopOf="@+id/carte"
+            app:layout_constraintVertical_bias="0.082" />
+
+        <View
+            android:id="@+id/D1D2"
+            android:layout_width="0dp"
+            android:layout_height="8dp"
+            android:background="@color/colorPrimary"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/carte"
+            app:layout_constraintEnd_toStartOf="@+id/D2"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/D1"
+            app:layout_constraintTop_toTopOf="@+id/carte"
+            app:layout_constraintVertical_bias="0.082" />
+
+        <View
+            android:id="@+id/D2D3"
+            android:layout_width="0dp"
+            android:layout_height="8dp"
+            android:background="@color/colorPrimary"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/carte"
+            app:layout_constraintEnd_toStartOf="@+id/D3"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/D2"
+            app:layout_constraintTop_toTopOf="@+id/carte"
+            app:layout_constraintVertical_bias="0.082" />
+
+        <View
+            android:id="@+id/D3A5"
+            android:layout_width="0dp"
+            android:layout_height="8dp"
+            android:background="@color/colorPrimary"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/carte"
+            app:layout_constraintEnd_toStartOf="@+id/A5"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/D3"
+            app:layout_constraintTop_toTopOf="@+id/carte"
+            app:layout_constraintVertical_bias="0.082" />
+
+        <View
+            android:id="@+id/A5C1"
+            android:layout_width="0dp"
+            android:layout_height="8dp"
+            android:background="@color/colorPrimary"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/carte"
+            app:layout_constraintEnd_toStartOf="@+id/C1"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/A5"
+            app:layout_constraintTop_toTopOf="@+id/carte"
+            app:layout_constraintVertical_bias="0.082" />
+
+        <View
+            android:id="@+id/C1C2"
+            android:layout_width="0dp"
+            android:layout_height="8dp"
+            android:background="@color/colorPrimary"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/carte"
+            app:layout_constraintEnd_toStartOf="@+id/C2"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/C1"
+            app:layout_constraintTop_toTopOf="@+id/carte"
+            app:layout_constraintVertical_bias="0.082" />
+
+        <View
+            android:id="@+id/C2C3"
+            android:layout_width="0dp"
+            android:layout_height="8dp"
+            android:background="@color/colorPrimary"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/carte"
+            app:layout_constraintEnd_toStartOf="@+id/C3"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/C2"
+            app:layout_constraintTop_toTopOf="@+id/carte"
+            app:layout_constraintVertical_bias="0.082" />
+
+        <View
+            android:id="@+id/C3E5"
+            android:layout_width="0dp"
+            android:layout_height="8dp"
+            android:background="@color/colorPrimary"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/carte"
+            app:layout_constraintEnd_toStartOf="@+id/E6"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/C3"
+            app:layout_constraintTop_toTopOf="@+id/carte"
+            app:layout_constraintVertical_bias="0.082" />
+
+        <View
+            android:id="@+id/E5E6"
+            android:layout_width="8dp"
+            android:layout_height="0dp"
+            android:background="@color/colorPrimary"
+            android:visibility="visible"
+            app:layout_constraintBottom_toTopOf="@+id/E5"
+            app:layout_constraintEnd_toEndOf="@+id/carte"
+            app:layout_constraintHorizontal_bias="0.916"
+            app:layout_constraintStart_toStartOf="@+id/carte"
+            app:layout_constraintTop_toBottomOf="@+id/E6"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <View
+            android:id="@+id/E4E5"
+            android:layout_width="8dp"
+            android:layout_height="0dp"
+            android:background="@color/colorPrimary"
+            android:visibility="visible"
+            app:layout_constraintBottom_toTopOf="@+id/E4"
+            app:layout_constraintEnd_toEndOf="@+id/carte"
+            app:layout_constraintHorizontal_bias="0.916"
+            app:layout_constraintStart_toStartOf="@+id/carte"
+            app:layout_constraintTop_toBottomOf="@+id/E5"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <View
+            android:id="@+id/E3E4"
+            android:layout_width="8dp"
+            android:layout_height="0dp"
+            android:background="@color/colorPrimary"
+            android:visibility="visible"
+            app:layout_constraintBottom_toTopOf="@+id/E3"
+            app:layout_constraintEnd_toEndOf="@+id/carte"
+            app:layout_constraintHorizontal_bias="0.916"
+            app:layout_constraintStart_toStartOf="@+id/carte"
+            app:layout_constraintTop_toBottomOf="@+id/E4"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <View
+            android:id="@+id/E2E3"
+            android:layout_width="8dp"
+            android:layout_height="0dp"
+            android:background="@color/colorPrimary"
+            android:visibility="visible"
+            app:layout_constraintBottom_toTopOf="@+id/E2"
+            app:layout_constraintEnd_toEndOf="@+id/carte"
+            app:layout_constraintHorizontal_bias="0.916"
+            app:layout_constraintStart_toStartOf="@+id/carte"
+            app:layout_constraintTop_toBottomOf="@+id/E3"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <View
+            android:id="@+id/A1A2"
+            android:layout_width="8dp"
+            android:layout_height="0dp"
+            android:background="@color/colorPrimary"
+            android:visibility="visible"
+            app:layout_constraintBottom_toTopOf="@+id/A1"
+            app:layout_constraintEnd_toEndOf="@+id/carte"
+            app:layout_constraintHorizontal_bias="0.566"
+            app:layout_constraintStart_toStartOf="@+id/carte"
+            app:layout_constraintTop_toBottomOf="@+id/A2"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <View
+            android:id="@+id/F3A1"
+            android:layout_width="8dp"
+            android:layout_height="0dp"
+            android:background="@color/colorPrimary"
+            android:visibility="visible"
+            app:layout_constraintBottom_toTopOf="@+id/F3"
+            app:layout_constraintEnd_toEndOf="@+id/carte"
+            app:layout_constraintHorizontal_bias="0.566"
+            app:layout_constraintStart_toStartOf="@+id/carte"
+            app:layout_constraintTop_toBottomOf="@+id/A1"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <View
+            android:id="@+id/A2A3"
+            android:layout_width="8dp"
+            android:layout_height="0dp"
+            android:background="@color/colorPrimary"
+            android:visibility="visible"
+            app:layout_constraintBottom_toTopOf="@+id/A2"
+            app:layout_constraintEnd_toEndOf="@+id/carte"
+            app:layout_constraintHorizontal_bias="0.566"
+            app:layout_constraintStart_toStartOf="@+id/carte"
+            app:layout_constraintTop_toBottomOf="@+id/A3"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <View
+            android:id="@+id/A3A4"
+            android:layout_width="8dp"
+            android:layout_height="0dp"
+            android:background="@color/colorPrimary"
+            android:visibility="visible"
+            app:layout_constraintBottom_toTopOf="@+id/A3"
+            app:layout_constraintEnd_toEndOf="@+id/carte"
+            app:layout_constraintHorizontal_bias="0.566"
+            app:layout_constraintStart_toStartOf="@+id/carte"
+            app:layout_constraintTop_toBottomOf="@+id/A4"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <View
+            android:id="@+id/A4A5"
+            android:layout_width="8dp"
+            android:layout_height="0dp"
+            android:background="@color/colorPrimary"
+            android:visibility="visible"
+            app:layout_constraintBottom_toTopOf="@+id/A4"
+            app:layout_constraintEnd_toEndOf="@+id/carte"
+            app:layout_constraintHorizontal_bias="0.566"
+            app:layout_constraintStart_toStartOf="@+id/carte"
+            app:layout_constraintTop_toBottomOf="@+id/A5"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <View
+            android:id="@+id/A1E1"
+            android:layout_width="0dp"
+            android:layout_height="8dp"
+            android:background="@color/colorPrimary"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/carte"
+            app:layout_constraintEnd_toStartOf="@+id/E1"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/A1"
+            app:layout_constraintTop_toTopOf="@+id/carte"
+            app:layout_constraintVertical_bias="0.608" />
+        <View
+            android:id="@+id/E1E2"
+            android:layout_width="0dp"
+            android:layout_height="8dp"
+            android:background="@color/colorPrimary"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/carte"
+            app:layout_constraintEnd_toStartOf="@+id/E2"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/E1"
+            app:layout_constraintTop_toTopOf="@+id/carte"
+            app:layout_constraintVertical_bias="0.608" />
 
 
         <TextView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -88,7 +399,7 @@
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="@+id/carte"
             app:layout_constraintEnd_toEndOf="@+id/carte"
-            app:layout_constraintHorizontal_bias="0.229"
+            app:layout_constraintHorizontal_bias="0.224"
             app:layout_constraintStart_toStartOf="@+id/carte"
             app:layout_constraintTop_toTopOf="@+id/carte"
             app:layout_constraintVertical_bias="0.748" />
@@ -114,10 +425,10 @@
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="@+id/carte"
             app:layout_constraintEnd_toEndOf="@+id/carte"
-            app:layout_constraintHorizontal_bias="0.228"
+            app:layout_constraintHorizontal_bias="0.224"
             app:layout_constraintStart_toStartOf="@+id/carte"
             app:layout_constraintTop_toTopOf="@+id/carte"
-            app:layout_constraintVertical_bias="0.662" />
+            app:layout_constraintVertical_bias="0.665" />
 
         <TextView xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/B2"
@@ -127,7 +438,7 @@
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="@+id/carte"
             app:layout_constraintEnd_toEndOf="@+id/carte"
-            app:layout_constraintHorizontal_bias="0.228"
+            app:layout_constraintHorizontal_bias="0.224"
             app:layout_constraintStart_toStartOf="@+id/carte"
             app:layout_constraintTop_toTopOf="@+id/carte"
             app:layout_constraintVertical_bias="0.61" />
@@ -140,7 +451,7 @@
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="@+id/carte"
             app:layout_constraintEnd_toEndOf="@+id/carte"
-            app:layout_constraintHorizontal_bias="0.228"
+            app:layout_constraintHorizontal_bias="0.224"
             app:layout_constraintStart_toStartOf="@+id/carte"
             app:layout_constraintTop_toTopOf="@+id/carte"
             app:layout_constraintVertical_bias="0.548" />
@@ -153,7 +464,7 @@
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="@+id/carte"
             app:layout_constraintEnd_toEndOf="@+id/carte"
-            app:layout_constraintHorizontal_bias="0.228"
+            app:layout_constraintHorizontal_bias="0.224"
             app:layout_constraintStart_toStartOf="@+id/carte"
             app:layout_constraintTop_toTopOf="@+id/carte"
             app:layout_constraintVertical_bias="0.381" />
@@ -166,7 +477,7 @@
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="@+id/carte"
             app:layout_constraintEnd_toEndOf="@+id/carte"
-            app:layout_constraintHorizontal_bias="0.228"
+            app:layout_constraintHorizontal_bias="0.224"
             app:layout_constraintStart_toStartOf="@+id/carte"
             app:layout_constraintTop_toTopOf="@+id/carte"
             app:layout_constraintVertical_bias="0.218" />
@@ -179,10 +490,10 @@
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="@+id/carte"
             app:layout_constraintEnd_toEndOf="@+id/carte"
-            app:layout_constraintHorizontal_bias="0.228"
+            app:layout_constraintHorizontal_bias="0.224"
             app:layout_constraintStart_toStartOf="@+id/carte"
             app:layout_constraintTop_toTopOf="@+id/carte"
-            app:layout_constraintVertical_bias="0.083" />
+            app:layout_constraintVertical_bias="0.078" />
 
         <TextView xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/D1"
@@ -195,7 +506,7 @@
             app:layout_constraintHorizontal_bias="0.29"
             app:layout_constraintStart_toStartOf="@+id/carte"
             app:layout_constraintTop_toTopOf="@+id/carte"
-            app:layout_constraintVertical_bias="0.085" />
+            app:layout_constraintVertical_bias="0.078" />
 
         <TextView xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/D2"
@@ -208,7 +519,7 @@
             app:layout_constraintHorizontal_bias="0.39"
             app:layout_constraintStart_toStartOf="@+id/carte"
             app:layout_constraintTop_toTopOf="@+id/carte"
-            app:layout_constraintVertical_bias="0.083" />
+            app:layout_constraintVertical_bias="0.078" />
 
         <TextView xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/D3"
@@ -221,7 +532,7 @@
             app:layout_constraintHorizontal_bias="0.49"
             app:layout_constraintStart_toStartOf="@+id/carte"
             app:layout_constraintTop_toTopOf="@+id/carte"
-            app:layout_constraintVertical_bias="0.083" />
+            app:layout_constraintVertical_bias="0.078" />
 
         <TextView xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/A5"
@@ -231,10 +542,10 @@
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="@+id/carte"
             app:layout_constraintEnd_toEndOf="@+id/carte"
-            app:layout_constraintHorizontal_bias="0.57"
+            app:layout_constraintHorizontal_bias="0.568"
             app:layout_constraintStart_toStartOf="@+id/carte"
             app:layout_constraintTop_toTopOf="@+id/carte"
-            app:layout_constraintVertical_bias="0.083" />
+            app:layout_constraintVertical_bias="0.078" />
 
         <TextView xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/A4"
@@ -364,7 +675,7 @@
             app:layout_constraintHorizontal_bias="0.922"
             app:layout_constraintStart_toStartOf="@+id/carte"
             app:layout_constraintTop_toTopOf="@+id/carte"
-            app:layout_constraintVertical_bias="0.083" />
+            app:layout_constraintVertical_bias="0.078" />
 
         <TextView xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/C3"
@@ -377,20 +688,20 @@
             app:layout_constraintHorizontal_bias="0.854"
             app:layout_constraintStart_toStartOf="@+id/carte"
             app:layout_constraintTop_toTopOf="@+id/carte"
-            app:layout_constraintVertical_bias="0.083" />
+            app:layout_constraintVertical_bias="0.078" />
 
         <TextView xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/C2"
             android:layout_width="@dimen/circle"
             android:layout_height="@dimen/circle"
             android:background="@drawable/circle"
-            android:visibility="invisible"
+            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="@+id/carte"
             app:layout_constraintEnd_toEndOf="@+id/carte"
             app:layout_constraintHorizontal_bias="0.753"
             app:layout_constraintStart_toStartOf="@+id/carte"
             app:layout_constraintTop_toTopOf="@+id/carte"
-            app:layout_constraintVertical_bias="0.083" />
+            app:layout_constraintVertical_bias="0.078" />
 
         <TextView xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/C1"
@@ -403,7 +714,7 @@
             app:layout_constraintHorizontal_bias="0.651"
             app:layout_constraintStart_toStartOf="@+id/carte"
             app:layout_constraintTop_toTopOf="@+id/carte"
-            app:layout_constraintVertical_bias="0.083" />
+            app:layout_constraintVertical_bias="0.078" />
 
 
     </android.support.constraint.ConstraintLayout>
