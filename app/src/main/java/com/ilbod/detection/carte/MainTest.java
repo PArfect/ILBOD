@@ -4,9 +4,10 @@ import java.io.IOException;
 
 public class MainTest {
 
-    private final String path = "app/src/main/res/raw/save.txt";
-
     public static void main(String[] args) {
+
+        final String path = "app/src/main/res/raw/save.txt";
+
         GestionCarte carte = new GestionCarte();
         Lieu lieu1 = new Lieu("Lieu 1");
         Lieu lieu2 = new Lieu("Lieu 2");
@@ -46,8 +47,8 @@ public class MainTest {
 
         System.out.println("enregistrement dans : test.txt");
         try {
-            carte.saveCarte("app/src/main/res/raw/save.txt");
-            GestionCarte carte2 = GestionCarte.loadCarte("app/src/main/res/raw/save.txt");
+            carte.saveCarte(path);
+            GestionCarte carte2 = GestionCarte.loadCarte(path);
             System.out.println("load de test.txt");
             boolean res11 = carte2.dansCarte(lieu1);
             boolean res22 = carte2.dansCarte(lieu2);
