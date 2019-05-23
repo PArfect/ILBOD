@@ -4,4 +4,15 @@
     <string name="request_permission">This sample needs camera permission.</string>
     <string name="camera_error">This device doesn\'t support Camera2 API.</string>
     <string name="boutonMain">Lancer la détection</string>
+
+    <string-array name="destinations">
+        <item> </item>
+        <item>A</item>
+        <item>B</item>
+        <item>C</item>
+        <item>D</item>
+        <item>E</item>
+        <item>F</item>
+
+    </string-array>
 </resources>
