@@ -1,6 +1,7 @@
 package com.ilbod.detection.carte;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class MainConstructeur {
     public static void main(String[] args) {
@@ -360,6 +361,12 @@ public class MainConstructeur {
             gc.saveCarte("app/src/main/res/raw/savemap.txt");
         } catch (IOException e1) {
             e1.printStackTrace();
+        }
+
+        BFS bfs = new BFS();
+        ArrayList<NoeudLieu> list = bfs.getChemin(gc.lieuToNoeud(C1),gc.lieuToNoeud(E1));
+        for (NoeudLieu nd : list) {
+            System.out.println(nd.getLieu().nom);
         }
     }
 }

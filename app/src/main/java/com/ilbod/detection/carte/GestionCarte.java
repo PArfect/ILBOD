@@ -67,7 +67,13 @@ public class GestionCarte implements Serializable {
      * Change le lieu d'origine
      */
     public void setOrigine(Lieu lieu) {
-        racine = new NoeudLieu(lieu);
+        if (courant.equals(racine)) {
+            racine = new NoeudLieu(lieu);
+            courant = racine;
+        } else {
+            racine = new NoeudLieu(lieu);
+        }
+
     }
 
     /**
@@ -154,6 +160,56 @@ public class GestionCarte implements Serializable {
             }
         }
         return false;
+    }
+
+    /**
+     * Donne le noeud associer au lieu
+     * @param lieu à verifier si il est dans la carte.
+     * @return le noeud est dans la carte et sinon null
+     */
+    public NoeudLieu lieuToNoeud(final Lieu lieu) {
+        if (lieu == null) {
+            throw new IllegalArgumentException("Le lieu ne peut pas être null");
+        }
+
+        ArrayList<NoeudLieu> lieuxVisites = new ArrayList<NoeudLieu>();
+        ArrayList<NoeudLieu> lieuxAVisiter = new ArrayList<NoeudLieu>();
+        lieuxAVisiter.add(racine);
+        NoeudLieu visited = racine;
+
+        while (!lieuxAVisiter.isEmpty()) {
+
+            if (lieu.getNom().equals(visited.getLieu().getNom())) {
+                return visited;
+            }
+            lieuxVisites.add(visited);
+            lieuxAVisiter.remove(0);
+
+            if (visited.getDroite() != null &&
+                    !lieuxAVisiter.contains(visited.getDroite()) &&
+                    !lieuxVisites.contains(visited.getDroite())) {
+                lieuxAVisiter.add(visited.getDroite());
+            }
+            if (visited.getGauche() != null &&
+                    !lieuxAVisiter.contains(visited.getGauche()) &&
+                    !lieuxVisites.contains(visited.getGauche())) {
+                lieuxAVisiter.add(visited.getGauche());
+            }
+            if (visited.getDevant() != null &&
+                    !lieuxAVisiter.contains(visited.getDevant()) &&
+                    !lieuxVisites.contains(visited.getDevant())) {
+                lieuxAVisiter.add(visited.getDevant());
+            }
+            if (visited.getDerriere() != null &&
+                    !lieuxAVisiter.contains(visited.getDerriere()) &&
+                    !lieuxVisites.contains(visited.getDerriere())) {
+                lieuxAVisiter.add(visited.getDerriere());
+            }
+            if (!lieuxAVisiter.isEmpty()) {
+                visited = lieuxAVisiter.get(0);
+            }
+        }
+        return null;
     }
 
     /**

@@ -3,6 +3,7 @@ package com.ilbod.detection.carte;
 import com.ilbod.detection.Exception.MemeLieu;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * Classe représentant les noeuds dans le graphe de la carte du bâtiment.
@@ -159,5 +160,16 @@ public class NoeudLieu implements Serializable {
         return gauche;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        NoeudLieu noeudLieu = (NoeudLieu) o;
+        return Objects.equals(lieu, noeudLieu.lieu);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(lieu);
+    }
 }
