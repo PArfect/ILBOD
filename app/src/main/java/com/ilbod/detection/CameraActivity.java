@@ -39,15 +39,17 @@ import android.support.design.widget.BottomSheetBehavior;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.util.Size;
 import android.view.Surface;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -55,7 +57,6 @@ import com.ilbod.detection.env.ImageUtils;
 import com.ilbod.detection.env.Logger;
 
 import java.nio.ByteBuffer;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.ilbod.detection.carte.GestionCarte;
@@ -65,7 +66,7 @@ public abstract class CameraActivity extends AppCompatActivity
         implements OnImageAvailableListener,
         Camera.PreviewCallback,
         CompoundButton.OnCheckedChangeListener,
-        View.OnClickListener {
+        View.OnClickListener, AdapterView.OnItemSelectedListener {
 
 
   private static final Logger LOGGER = new Logger();
@@ -90,14 +91,18 @@ public abstract class CameraActivity extends AppCompatActivity
   private LinearLayout gestureLayout;
   private BottomSheetBehavior sheetBehavior;
 
-  protected TextView frameValueTextView, cropValueTextView, inferenceTimeTextView;
+  protected TextView frameValueTextView;
   protected ImageView bottomSheetArrowImageView;
   private SwitchCompat apiSwitchCompat;
 
   protected GestionLocalisation gestionLoca;
   protected GestionCarte gestionCarte;
   protected SwitchCompat detection;
-  protected HashMap<String,TextView> noeudsAffiche;
+  protected String[] destinations;
+  protected Spinner destinationSpin;
+  protected HashMap<String,TextView> noeudsDetectesAffiche;
+  protected HashMap<String,TextView> noeudsCheminAffiche;
+  protected HashMap<String,View> liensAffiche;
   protected int occurrenceLieu;
 
   @Override
@@ -110,13 +115,23 @@ public abstract class CameraActivity extends AppCompatActivity
     gestionCarte.initCarte();
     gestionLoca = new GestionLocalisation();
     occurrenceLieu = 0;
-    noeudsAffiche = new HashMap<>();
+    noeudsDetectesAffiche = new HashMap<>();
+    noeudsCheminAffiche = new HashMap<>();
+    liensAffiche = new HashMap<>();
 
     setContentView(R.layout.activity_camera);
     Toolbar toolbar = findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
     getSupportActionBar().setDisplayShowTitleEnabled(false);
+
     detection = findViewById(R.id.detectionswitch);
+    destinations = getResources().getStringArray(R.array.destinations);
+    destinationSpin = findViewById(R.id.dest_spinner);
+    destinationSpin.setOnItemSelectedListener(this);
+    ArrayAdapter aa = ArrayAdapter.createFromResource(this,R.array.destinations, R.layout.spinner_item_dropdown);
+    aa.setDropDownViewResource(R.layout.spinner_item);
+    destinationSpin.setAdapter(aa);
+    destinationSpin.setEnabled(false);
 
 
 
@@ -488,11 +503,23 @@ public abstract class CameraActivity extends AppCompatActivity
     }
   }
 
+  protected void clearChemin(){
+    for(HashMap.Entry<String, TextView> noeud : noeudsCheminAffiche.entrySet()){
+      noeud.getValue().setVisibility(View.INVISIBLE);
+    }
+    for(HashMap.Entry<String, View> lien : liensAffiche.entrySet()){
+      lien.getValue().setVisibility(View.INVISIBLE);
+    }
+    noeudsCheminAffiche = new HashMap<>();
+    liensAffiche = new HashMap<>();
+
+  }
+
   protected void resetNoeudsAffiche(int occurrence){
-    for(HashMap.Entry<String, TextView> noeudAffiche : noeudsAffiche.entrySet()){
+    for(HashMap.Entry<String, TextView> noeudAffiche : noeudsDetectesAffiche.entrySet()){
       noeudAffiche.getValue().setVisibility(View.INVISIBLE);
     }
-    noeudsAffiche = new HashMap<>();
+    noeudsDetectesAffiche = new HashMap<>();
     occurrenceLieu = occurrence;
   }
 
@@ -545,19 +572,24 @@ public abstract class CameraActivity extends AppCompatActivity
     }
   }
 
+  //Performing action onItemSelected and onNothing selected
+  @Override
+  public void onItemSelected(AdapterView<?> arg0, View arg1, int position,long id) {
+    clearChemin();
+    Toast.makeText(getApplicationContext(), destinations[position], Toast.LENGTH_LONG).show();
 
+  }
+
+  @Override
+  public void onNothingSelected(AdapterView<?> arg0) {
+// TODO Auto-generated method stub
+
+  }
 
   protected void LieuTrouveInfo(String frameInfo) {
     frameValueTextView.setText(frameInfo);
   }
 
-  protected void showCropInfo(String cropInfo) {
-    cropValueTextView.setText(cropInfo);
-  }
-
-  protected void showInference(String inferenceTime) {
-    inferenceTimeTextView.setText(inferenceTime);
-  }
 
 
 

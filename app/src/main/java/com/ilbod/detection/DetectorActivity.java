@@ -28,13 +28,14 @@ import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.media.ImageReader.OnImageAvailableListener;
 import android.os.SystemClock;
-import android.util.Log;
 import android.util.Size;
 import android.util.TypedValue;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ilbod.detection.carte.Lieu;
 import com.ilbod.detection.customview.OverlayView;
 import com.ilbod.detection.customview.OverlayView.DrawCallback;
 import com.ilbod.detection.env.BorderedText;
@@ -44,9 +45,11 @@ import com.ilbod.detection.localisation.LieuProba;
 import com.ilbod.detection.tflite.Classifier;
 import com.ilbod.detection.tflite.TFLiteObjectDetectionAPIModel;
 import org.tensorflow.demo.tracking.MultiBoxTracker;
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -56,17 +59,17 @@ import com.ilbod.detection.carte.Objet;
  * An activity that uses a TensorFlowMultiBoxDetector and ObjectTracker to detect and then track
  * objects.
  */
-public class DetectorActivity extends CameraActivity implements OnImageAvailableListener {
+public class DetectorActivity extends CameraActivity implements OnImageAvailableListener{
   private static final Logger LOGGER = new Logger();
 
   // Configuration values for the prepackaged SSD model.
   private static final int TF_OD_API_INPUT_SIZE = 300;
-  private static final boolean TF_OD_API_IS_QUANTIZED = true;
+  private static final boolean TF_OD_API_IS_QUANTIZED = false;
   private static final String TF_OD_API_MODEL_FILE = "detect.tflite";
   private static final String TF_OD_API_LABELS_FILE = "file:///android_asset/labelmap.txt";
   private static final DetectorMode MODE = DetectorMode.TF_OD_API;
   // Minimum detection confidence to track a detection.
-  private static final float MINIMUM_CONFIDENCE_TF_OD_API = 0.5f;
+  private static final float MINIMUM_CONFIDENCE_TF_OD_API = 0.1f;
   private static final boolean MAINTAIN_ASPECT = false;
   private static final Size DESIRED_PREVIEW_SIZE = new Size(640, 480);
   private static final boolean SAVE_PREVIEW_BITMAP = false;
@@ -258,12 +261,69 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
 
                                 affichageLocalisations();
                                 gestionLoca.setLieuTrouveUpdatedFalse();
-                                LieuTrouveInfo(String.valueOf(noeudsAffiche.size()));
+                                LieuTrouveInfo(String.valueOf(noeudsDetectesAffiche.size()));
+                                if(destinationSpin.isEnabled() && noeudsDetectesAffiche.size() != 1){
+                                  destinationSpin.setEnabled(false);
+                                  clearChemin();
+                                }
+                                if(!(destinationSpin.isEnabled()) && noeudsDetectesAffiche.size() == 1){
+                                  destinationSpin.setEnabled(true);
+                                }
                               }
                             }
                           });
                 }
               });
+
+  }
+
+
+
+  /**
+   * Affichage du chemin entre le premier lieu et le dernier de lieux.
+   * @param lieux Liste des lieux sur le chemin.
+   */
+  private void affichageChemin(ArrayList<Lieu> lieux){
+    String nom;
+    Context context = getApplicationContext();
+    int id;
+    for(int i = 0; i<lieux.size()-1;i++){
+      afficheLien(lieux.get(i),lieux.get(i+1));
+      nom = lieux.get(i).getNom();
+      id = context.getResources().getIdentifier(nom,"id", context.getPackageName());
+
+      noeudsCheminAffiche.put(nom,findViewById(id));
+      noeudsCheminAffiche.get(nom).setVisibility(View.VISIBLE);
+
+    }
+
+    nom = lieux.get(lieux.size()-1).getNom();
+    id = context.getResources().getIdentifier(nom,"id", context.getPackageName());
+
+    noeudsCheminAffiche.put(nom,findViewById(id));
+    noeudsCheminAffiche.get(nom).setVisibility(View.VISIBLE);
+
+  }
+
+  /**
+   * Affichage du liens entre deux lieux.
+   * @param lieu1 lieu à l'extremité du lien
+   * @param lieu2 lieu à l'extremité du lien
+   */
+  private void afficheLien(Lieu lieu1, Lieu lieu2){
+    String nom="";
+    if(lieu1.getNom().compareTo(lieu2.getNom())< 0){
+      nom = nom + lieu1.getNom() + lieu2.getNom();
+    }
+    else{
+      nom = nom + lieu2.getNom() + lieu1.getNom();
+    }
+
+    Context context = getApplicationContext();
+    int id = context.getResources().getIdentifier(nom,"id", context.getPackageName());
+
+    liensAffiche.put(nom,findViewById(id));
+    liensAffiche.get(nom).setVisibility(View.VISIBLE);
 
   }
 
@@ -282,11 +342,8 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
           return;
         }
         afficheLocalisation(lieu);
-
       }
-
     }
-
   }
   /**
    * Affichage d'un point correspondant à un lieu sur la carte.
@@ -294,15 +351,13 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
    */
   private void afficheLocalisation(final LieuProba lieu){
     String nom = lieu.getLieu().getNom();
-    if(!(noeudsAffiche.containsKey(nom))){
+    if(!(noeudsDetectesAffiche.containsKey(nom))){
       Context context = getApplicationContext();
-      int id = context.getResources().getIdentifier(lieu.getLieu().getNom(),"id", context.getPackageName());
+      int id = context.getResources().getIdentifier(nom,"id", context.getPackageName());
 
-      noeudsAffiche.put(nom,findViewById(id));
-      noeudsAffiche.get(nom).setVisibility(View.VISIBLE);
+      noeudsDetectesAffiche.put(nom,findViewById(id));
+      noeudsDetectesAffiche.get(nom).setVisibility(View.VISIBLE);
     }
-
-
   }
 
 

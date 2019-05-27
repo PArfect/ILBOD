@@ -397,6 +397,7 @@ public class GestionCarte implements Serializable {
 
         createNoeudDevant(new Lieu("F1"));
         createNoeudDerriere(new Lieu("F2"));
+        createNoeudDroite(new Lieu("C2"));
         moveDerriere();
         assert(courant.getLieu().getNom()=="F2");
         addObjet("chair");
@@ -404,6 +405,10 @@ public class GestionCarte implements Serializable {
         moveDevant();
         assert(courant.getLieu().getNom()=="F1");
         addObjet("oven");
+        moveDerriere();
+        moveDroite();
+        addObjet("chair");
+        addObjet("laptop");
 
     }
 
