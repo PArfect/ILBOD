@@ -361,6 +361,16 @@ public class GestionCarte implements Serializable {
     }
 
     /**
+     * Renvoi la liste de lieu du plus court chemin.
+     */
+    public ArrayList<Lieu> getPlusCourtChemin(String slieu1, String slieu2) {
+        Lieu lieu1 = new Lieu(slieu1);
+        Lieu lieu2 = new Lieu(slieu2);
+        BFS bfs = new BFS();
+        return bfs.BFSresult(lieuToNoeud(lieu1), lieuToNoeud(lieu2));
+    }
+
+    /**
      * Memorize le noeud courant
      */
     public void setMemoire() {
@@ -447,6 +457,7 @@ public class GestionCarte implements Serializable {
         bi.close();
         return carte;
     }
+
 
 
     @Override

@@ -58,8 +58,9 @@ public class BFS {
 	   queue.add(listeNoeud.get(0));
 	   pathStack.add(listeNoeud.get(0));
 	   visited.put(depart, true);
+	   boolean exit = true;
 	   
-	   while (!queue.isEmpty()) {
+	   while (!queue.isEmpty() && exit) {
 		  NoeudLieu cour = queue.poll();
 		  neighbors(cour);
 		  
@@ -70,8 +71,10 @@ public class BFS {
 				  visited.put(noeud, true);
 				  pathStack.add(noeud);
 				  
-				  if (cour.equals(dest))
+				  if (noeud.equals(dest)) {
+					  exit = false;
 					  break;
+				  }
 			  }
 		  }
 	   }
@@ -120,15 +123,34 @@ public class BFS {
    }
 
 	/**
-	 * trouve le plus court chemin entre depart et dest
+	 * trouve le plus court chemin entre depart et dest.
 	 * @param dest noeud destination
 	 * @param depart noeud source
 	 * @return chemin le plus court chemin
 	 */
-	public ArrayList<NoeudLieu> getChemin(NoeudLieu depart, NoeudLieu dest) {
+	private ArrayList<NoeudLieu> getChemin(NoeudLieu depart, NoeudLieu dest) {
 		this.depart = depart;
 		this.dest = dest;
 		trouverChemin();
 		return chemin;
+	}
+
+	/**
+	 * transforme l'array liste de noeud en liste de lieu.
+	 */
+	private ArrayList<Lieu> getCheminLieu() {
+		ArrayList<Lieu> cheminLieu = new ArrayList<Lieu>();
+		for (int i = 0; i<chemin.size();i++) {
+			cheminLieu.add(chemin.get(i).getLieu());
+		}
+		return cheminLieu;
+	}
+
+	/**
+	 * retourne la liste des lieux du plus court chemin.
+	 */
+	public ArrayList<Lieu> BFSresult(NoeudLieu depart, NoeudLieu dest) {
+		getChemin(depart, dest);
+		return getCheminLieu();
 	}
 }
