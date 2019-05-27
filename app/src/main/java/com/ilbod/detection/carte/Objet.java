@@ -27,6 +27,10 @@ public class Objet implements Serializable {
      * Lieux dans lesquel l'objet est référencé
      **/
     HashMap<String, Lieu> lieux;
+    /**
+     * Nombre de lieu de la carte.
+     */
+    public static int nombreObjets=0;
 
     /**
      * Constructeur Objet
@@ -39,6 +43,7 @@ public class Objet implements Serializable {
         }
         this.nom = nom;
         this.lieux = new HashMap<String, Lieu>();
+        nombreObjets++;
 
         assert(invariant());
     }

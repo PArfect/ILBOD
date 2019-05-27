@@ -25,7 +25,7 @@ public class LieuProba{
      */
     public LieuProba(Lieu lieu){
         this.lieu = lieu;
-        occurrence = 1;
+        occurrence = 0;
     }
 
     public Lieu getLieu(){
@@ -38,10 +38,11 @@ public class LieuProba{
     }
 
     /**
-     * incrémente le nombre d'occurrence.
+     * incrémente la valeur d'occurrence lorsqu'on a trouvé un nouvel objet.
+     * @param n valeur d'incrémentation.
      */
-    public void incrementOccurrence(){
-        occurrence++;
+    public void incrementOccurrence(int n){
+        occurrence = occurrence + n;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)

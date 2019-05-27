@@ -42,10 +42,17 @@
             android:layout_height="?attr/actionBarSize"
             android:layout_alignParentTop="true"
             android:background="@color/semi_transparent">
+
+            <ImageView
+                android:layout_width="@dimen/ilbodtoolbar"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                app:srcCompat="@drawable/logo_reduit" />
             <LinearLayout
-                android:layout_width="@dimen/toolbarbuttons"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
+                android:layout_marginLeft="20dp"
                 android:background="@null">
 
                 <ImageButton
@@ -90,32 +97,14 @@
                     android:layout_height="match_parent"
                     android:background="@color/colorPrimarytransparent"
                     android:popupBackground="@android:color/transparent"
+                    android:dropDownWidth="200dp"
+                    android:gravity="right"
                     />
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:background="@null">
 
-                <ImageView
-                    android:layout_width="@dimen/ilbodtoolbar"
-                    android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    app:srcCompat="@drawable/logo_reduit" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/tfl_logo"
-                    android:layout_marginRight="8dp"/>
-
-            </LinearLayout>
         </android.support.v7.widget.Toolbar>
-
-
 
 
     </RelativeLayout>

@@ -1,7 +1,5 @@
 package com.ilbod.detection.localisation;
 
-import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -46,7 +44,6 @@ public class GestionLocalisation {
         objetsDejaDetectes = new HashMap<String, Objet>();
         lieuxProbables = new ArrayList<>();
         lieuTrouveUpdated = false;
-
         assert(invariant());
     }
 
@@ -90,23 +87,24 @@ public class GestionLocalisation {
 
                 lieutrouve = new LieuProba(lieu.getValue());
                 indice = lieuxProbables.indexOf(lieutrouve);
-
                 if (indice == -1){
-                    lieuxProbables.add(lieutrouve);
+                    lieutrouve.incrementOccurrence((Lieu.nombreLieux -lieux.size())+(Objet.nombreObjets-lieu.getValue().getObjets().size()));
+                    newindice=0;
+                    while((newindice<lieuxProbables.size())&&(lieuxProbables.get(newindice).getOccurrence()>lieutrouve.getOccurrence())){
+                        newindice++;
+                    }
+                    lieuxProbables.add(newindice,lieutrouve);
+
                 }
                 else{
-                    lieutrouve= lieuxProbables.remove(indice); //On le repositionne au bon endroit pour que la liste reste triée
-                    lieutrouve.incrementOccurrence();
-                    for(newindice = indice-1;
-                        (newindice>0) && (lieuxProbables.get(newindice).getOccurrence()<lieutrouve.getOccurrence());
-                        newindice--){
+                    lieutrouve= lieuxProbables.remove(indice); //On le repositionne au bon endroit pour que la liste reste triée.
+                    lieutrouve.incrementOccurrence((Lieu.nombreLieux -lieux.size())+(Objet.nombreObjets-lieu.getValue().getObjets().size()));
+                    newindice = indice-1;
+                    while((newindice>=0) && (lieuxProbables.get(newindice).getOccurrence()<lieutrouve.getOccurrence())){
+                        newindice--;
                     }
-                    if(newindice>0){
-                        lieuxProbables.add(newindice,lieutrouve);
-                    }
-                    else{
-                        lieuxProbables.add(0,lieutrouve);
-                    }
+                    newindice++;
+                    lieuxProbables.add(newindice,lieutrouve);
                 }
 
             }

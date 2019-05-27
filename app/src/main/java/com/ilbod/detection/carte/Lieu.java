@@ -27,6 +27,10 @@ public class Lieu implements Serializable {
      * Liste des objets que référence le lieu.
      **/
     HashMap<String, Objet> objets;
+    /**
+     * Nombre de lieu de la carte.
+     */
+    public static int nombreLieux=0;
 
     /**
      * Constructeur du lieu.

@@ -69,7 +69,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
   private static final String TF_OD_API_LABELS_FILE = "file:///android_asset/labelmap.txt";
   private static final DetectorMode MODE = DetectorMode.TF_OD_API;
   // Minimum detection confidence to track a detection.
-  private static final float MINIMUM_CONFIDENCE_TF_OD_API = 0.1f;
+  private static final float MINIMUM_CONFIDENCE_TF_OD_API = 0.5f;
   private static final boolean MAINTAIN_ASPECT = false;
   private static final Size DESIRED_PREVIEW_SIZE = new Size(640, 480);
   private static final boolean SAVE_PREVIEW_BITMAP = false;
@@ -250,29 +250,20 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                   computingDetection = false;
 
                   gestionLoca.lieuPlusProbable();
+                  if(gestionLoca.getLieuTrouveUpdated()){
 
-
-                  runOnUiThread(
-                          new Runnable() {
-                            @Override
-                            public void run() {
-
-                              if(gestionLoca.getLieuTrouveUpdated()){
-
-                                affichageLocalisations();
-                                gestionLoca.setLieuTrouveUpdatedFalse();
-                                LieuTrouveInfo(String.valueOf(noeudsDetectesAffiche.size()));
-                                if(destinationSpin.isEnabled() && noeudsDetectesAffiche.size() != 1){
-                                  destinationSpin.setEnabled(false);
-                                  clearChemin();
-                                }
-                                if(!(destinationSpin.isEnabled()) && noeudsDetectesAffiche.size() == 1){
-                                  destinationSpin.setEnabled(true);
-                                }
+                    runOnUiThread(
+                            new Runnable() {
+                              @Override
+                              public void run() {
+                                  affichageLocalisations();
+                                  gestionLoca.setLieuTrouveUpdatedFalse();
+                                  LieuTrouveInfo(String.valueOf(noeudsDetectesAffiche.size()));
                               }
-                            }
-                          });
+                            });
+                  }
                 }
+
               });
 
   }
@@ -293,7 +284,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
       id = context.getResources().getIdentifier(nom,"id", context.getPackageName());
 
       noeudsCheminAffiche.put(nom,findViewById(id));
-      noeudsCheminAffiche.get(nom).setVisibility(View.VISIBLE);
+      noeudsCheminAffiche.get(nom).setBackgroundResource(R.drawable.circle);
 
     }
 
@@ -356,7 +347,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
       int id = context.getResources().getIdentifier(nom,"id", context.getPackageName());
 
       noeudsDetectesAffiche.put(nom,findViewById(id));
-      noeudsDetectesAffiche.get(nom).setVisibility(View.VISIBLE);
+      noeudsDetectesAffiche.get(nom).setBackgroundResource(R.drawable.circle);
     }
   }
 

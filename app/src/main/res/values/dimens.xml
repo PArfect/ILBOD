@@ -8,10 +8,11 @@
     <dimen name="detectionwidth">50dp</dimen>
     <dimen name="ilbodtoolbar">50dp</dimen>
     <dimen name="toolbarlogos">80dp</dimen>
-    <dimen name="spinner">50dp</dimen>
+    <dimen name="spinner">200dp</dimen>
 
 
     <dimen name="carte">400dp</dimen>
     <dimen name="circle">15dp</dimen>
+    <dimen name="circle2">8dp</dimen>
 
 </resources>

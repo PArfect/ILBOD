@@ -99,6 +99,8 @@ public abstract class CameraActivity extends AppCompatActivity
   protected GestionCarte gestionCarte;
   protected SwitchCompat detection;
   protected String[] destinations;
+  protected String[] noeudsCorrespondant;
+  protected String destination;
   protected Spinner destinationSpin;
   protected HashMap<String,TextView> noeudsDetectesAffiche;
   protected HashMap<String,TextView> noeudsCheminAffiche;
@@ -126,12 +128,14 @@ public abstract class CameraActivity extends AppCompatActivity
 
     detection = findViewById(R.id.detectionswitch);
     destinations = getResources().getStringArray(R.array.destinations);
+    noeudsCorrespondant = getResources().getStringArray(R.array.noeudsCorrespondant);
+    destination = "";
+    assert(destinations.length==noeudsCorrespondant.length);
     destinationSpin = findViewById(R.id.dest_spinner);
     destinationSpin.setOnItemSelectedListener(this);
     ArrayAdapter aa = ArrayAdapter.createFromResource(this,R.array.destinations, R.layout.spinner_item_dropdown);
     aa.setDropDownViewResource(R.layout.spinner_item);
     destinationSpin.setAdapter(aa);
-    destinationSpin.setEnabled(false);
 
 
 
@@ -517,7 +521,7 @@ public abstract class CameraActivity extends AppCompatActivity
 
   protected void resetNoeudsAffiche(int occurrence){
     for(HashMap.Entry<String, TextView> noeudAffiche : noeudsDetectesAffiche.entrySet()){
-      noeudAffiche.getValue().setVisibility(View.INVISIBLE);
+      noeudAffiche.getValue().setBackgroundResource(R.drawable.circle2);
     }
     noeudsDetectesAffiche = new HashMap<>();
     occurrenceLieu = occurrence;
@@ -566,6 +570,7 @@ public abstract class CameraActivity extends AppCompatActivity
               new Runnable() {
                 @Override
                 public void run() {
+
                   LieuTrouveInfo(String.valueOf(0));
                 }
               });
@@ -575,8 +580,11 @@ public abstract class CameraActivity extends AppCompatActivity
   //Performing action onItemSelected and onNothing selected
   @Override
   public void onItemSelected(AdapterView<?> arg0, View arg1, int position,long id) {
-    clearChemin();
+    if(liensAffiche.size()!=0){
+      clearChemin();
+    }
     Toast.makeText(getApplicationContext(), destinations[position], Toast.LENGTH_LONG).show();
+    destination = noeudsCorrespondant[position];
 
   }
 
@@ -589,8 +597,6 @@ public abstract class CameraActivity extends AppCompatActivity
   protected void LieuTrouveInfo(String frameInfo) {
     frameValueTextView.setText(frameInfo);
   }
-
-
 
 
 

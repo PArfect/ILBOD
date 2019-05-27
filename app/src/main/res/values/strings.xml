@@ -6,13 +6,64 @@
     <string name="boutonMain">Lancer la détection</string>
 
     <string-array name="destinations">
-        <item> </item>
-        <item>A</item>
-        <item>B</item>
-        <item>C</item>
-        <item>D</item>
-        <item>E</item>
-        <item>F</item>
+        <item>Destination</item>
+        <item>Forum</item>
+        <item>Ascenceur/SSP</item>
+        <item>Entrée Bat B</item>
+        <item>Helpdesk/B06</item>
+        <item>B03/B04/B07</item>
+        <item>B02/B08/Imprimantes</item>
+        <item>Couloir B/D</item>
+        <item>D03/D04/D06</item>
+        <item>D01/D02</item>
+        <item>D012</item>
+        <item>Couloir A/E/Forum</item>
+        <item>A05</item>
+        <item>A03/A04/Stage</item>
+        <item>A01/A02</item>
+        <item>Couloir A/C/D</item>
+        <item>C06</item>
+        <item>C05/C07</item>
+        <item>C01/C03/C09</item>
+        <item>E001-E020</item>
+        <item>Entrée E</item>
+        <item>E01/E02</item>
+        <item>E03</item>
+        <item>E04/E05/E08</item>
+
+
+
 
     </string-array>
+    <string-array name="noeudsCorrespondant">
+        <item> </item>
+        <item>F1</item>
+        <item>B1</item>
+        <item>B2</item>
+        <item>B3</item>
+        <item>B4</item>
+        <item>B6</item>
+        <item>D1</item>
+        <item>D2</item>
+        <item>D3</item>
+        <item>A1</item>
+        <item>A2</item>
+        <item>A3</item>
+        <item>A4</item>
+        <item>A5</item>
+        <item>C1</item>
+        <item>C2</item>
+        <item>C3</item>
+        <item>E1</item>
+        <item>E2</item>
+        <item>E3</item>
+        <item>E4</item>
+        <item>E5</item>
+        <item>E6</item>
+
+
+
+
+    </string-array>
+
 </resources>

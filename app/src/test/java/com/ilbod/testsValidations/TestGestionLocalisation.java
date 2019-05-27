@@ -51,9 +51,10 @@ public class TestGestionLocalisation {
         Objet objet1 = new Objet("objet1");
         Objet objet2 = new Objet("objet2");
 
-        objet1.addLieu(lieu1);
-        objet2.addLieu(lieu2);
-
+        lieu1.addObjetRecursive(objet1); //(2-1)+(2-1) = 2;
+        lieu2.addObjetRecursive(objet2); //(2-1)+(2-1) = 2;
+        Objet.nombreObjets=2;
+        Lieu.nombreLieux=2;
         gestionLoca.ajoutObjetDetecte(objet1);
         gestionLoca.ajoutObjetDetecte(objet2);
 
@@ -62,11 +63,11 @@ public class TestGestionLocalisation {
         HashMap<String, Objet> objetsDejaDetectes = gestionLoca.getObjetsDejaDetectes();
         ArrayList<LieuProba> lieuxProbables = gestionLoca.getLieuxProbables();
 
-        Assert.assertEquals(lieuxProbables.get(0).getOccurrence(), 1);
-        Assert.assertEquals(lieuxProbables.get(0).getLieu(),lieu1);
+        Assert.assertEquals(2,lieuxProbables.get(0).getOccurrence());
+        Assert.assertEquals(lieu2,lieuxProbables.get(0).getLieu());
 
-        Assert.assertEquals(lieuxProbables.get(1).getOccurrence(), 1);
-        Assert.assertEquals(lieuxProbables.get(1).getLieu(),lieu2);
+        Assert.assertEquals(2,lieuxProbables.get(1).getOccurrence());
+        Assert.assertEquals(lieu1,lieuxProbables.get(1).getLieu());
 
         Assert.assertTrue(objetsDejaDetectes.containsValue(objet1));
         Assert.assertTrue(objetsDejaDetectes.containsValue(objet2));
@@ -87,14 +88,16 @@ public class TestGestionLocalisation {
         Objet objet4 = new Objet("objet4");
         Objet objet5 = new Objet("objet5");
 
-        objet1.addLieu(lieu1);
-        objet2.addLieu(lieu2);
-        objet1.addLieu(lieu2);
-        objet3.addLieu(lieu3);
-        objet3.addLieu(lieu1);
-        objet4.addLieu(lieu2);
-        objet2.addLieu(lieu4);
-        objet5.addLieu(lieu4);
+        lieu1.addObjetRecursive(objet1); //(4-2)+(5-2) = 5
+        lieu1.addObjetRecursive(objet3); //(4-2)+(5-2) = 5 10
+        lieu2.addObjetRecursive(objet2); //(4-2)+(5-3) = 4
+        lieu2.addObjetRecursive(objet1); //(4-2)+(5-3) = 4
+        lieu2.addObjetRecursive(objet4); //(4-1)+(5-3) = 5 13
+        lieu3.addObjetRecursive(objet3); //(4-2)+(5-1) = 6 6
+        lieu4.addObjetRecursive(objet2); //(4-2)+(5-2) = 5
+        lieu4.addObjetRecursive(objet5); //(4-1)+(5-2) = 6 11
+        Lieu.nombreLieux=4;
+        Objet.nombreObjets=5;
 
         gestionLoca.ajoutObjetDetecte(objet1);
         gestionLoca.ajoutObjetDetecte(objet2);
@@ -108,16 +111,16 @@ public class TestGestionLocalisation {
         ArrayList<LieuProba> lieuxProbables = gestionLoca.getLieuxProbables();
 
 
-        Assert.assertEquals(3, lieuxProbables.get(0).getOccurrence());
+        Assert.assertEquals(13, lieuxProbables.get(0).getOccurrence());
         Assert.assertEquals(lieu2,lieuxProbables.get(0).getLieu());
 
-        Assert.assertEquals(2, lieuxProbables.get(1).getOccurrence());
+        Assert.assertEquals(11, lieuxProbables.get(1).getOccurrence());
         Assert.assertEquals(lieu4,lieuxProbables.get(1).getLieu());
 
-        Assert.assertEquals(2, lieuxProbables.get(2).getOccurrence());
+        Assert.assertEquals(10, lieuxProbables.get(2).getOccurrence());
         Assert.assertEquals(lieu1,lieuxProbables.get(2).getLieu());
 
-        Assert.assertEquals(1, lieuxProbables.get(3).getOccurrence());
+        Assert.assertEquals(6, lieuxProbables.get(3).getOccurrence());
         Assert.assertEquals(lieu3,lieuxProbables.get(3).getLieu());
 
         Assert.assertTrue(objetsDejaDetectes.containsValue(objet1));
