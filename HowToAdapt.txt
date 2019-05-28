@@ -1,0 +1,17 @@
+To adapt the app to other places, you have to first train your own neural network.
+Indeed, the positioning is based on object detection, so it is better to have the right object detected. To do that, you can follow this tutorial to get a tensorflow frozen graph (.pb).
+https://github.com/EdjeElectronics/TensorFlow-Object-Detection-API-Tutorial-Train-Multiple-Objects-Windows-10#5-create-label-map-and-configure-training
+
+Then, you have to convert it to the format .tflite for Android, this require Tensorflow version 1.7 or higher. 
+You can use this command line:
+tflite_convert   --output_file=detect.tflite   --graph_def_file=tflite_graph.pb --input_shapes=1,300,300,3  --input_arrays=normalized_input_image_tensor --allow_custom_ops  --output_arrays='TFLite_Detection_PostProcess','TFLite_Detection_PostProcess:1','TFLite_Detection_PostProcess:2','TFLite_Detection_PostProcess:3'
+
+Note: you also have to change the labelmap according to the same format as the one in the asset folder. (the first line MUST BE ???, because by default you train label from id 1 to n but Android seems to start from 0)
+
+After that, you have to create your own map of the place you want to try. To do that, you have to change the layout_carte with your own .png and changing the node to the place you want.
+The application is interpreting the xml node using their ID and the String nom corresponding to the name of Lieu. (the location) This is also important because the path is shown through a concatenation of the ID of two node in lexicographic order.
+
+Then you have to make a map and save it using MainConstructeur. The app will then load the binary file provided by the save. //Not working at moment
+Altenatively, change initCarte with the map you want and use it in CameraActivity to initialize the map.
+
+Finaly, you have to change the String array in folder values, string.xml. The first array what is shown in the scrolling menu while the second array is the corresponding ID.
