@@ -363,10 +363,10 @@ public class MainConstructeur {
             e1.printStackTrace();
         }
 
-        BFS bfs = new BFS();
-        ArrayList<NoeudLieu> list = bfs.getChemin(gc.lieuToNoeud(C1),gc.lieuToNoeud(E1));
+     /*   BFS bfs = new BFS();
+        ArrayList<NoeudLieu> list = bfs.getChemin(gc.lieuToNoeud(C1),gc.lieuToNoeud(D2));
         for (NoeudLieu nd : list) {
             System.out.println(nd.getLieu().nom);
-        }
+        }*/
     }
 }

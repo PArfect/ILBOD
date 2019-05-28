@@ -251,7 +251,6 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
 
                   gestionLoca.lieuPlusProbable();
                   if(gestionLoca.getLieuTrouveUpdated()){
-
                     runOnUiThread(
                             new Runnable() {
                               @Override
@@ -259,6 +258,11 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                                   affichageLocalisations();
                                   gestionLoca.setLieuTrouveUpdatedFalse();
                                   LieuTrouveInfo(String.valueOf(noeudsDetectesAffiche.size()));
+                                  if(!(destination.equals("")) && gestionLoca.getLieuxProbables().size()>0){
+                                    clearChemin();
+                                    affichageChemin(gestionCarte.getPlusCourtChemin(gestionLoca.getLieuxProbables().get(0).getLieu().getNom(),destination));
+                                    affichageLocalisations();
+                                  }
                               }
                             });
                   }

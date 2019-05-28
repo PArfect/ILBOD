@@ -508,8 +508,9 @@ public abstract class CameraActivity extends AppCompatActivity
   }
 
   protected void clearChemin(){
+    int i = 0;
     for(HashMap.Entry<String, TextView> noeud : noeudsCheminAffiche.entrySet()){
-      noeud.getValue().setVisibility(View.INVISIBLE);
+        noeud.getValue().setBackgroundResource(R.drawable.circle2);
     }
     for(HashMap.Entry<String, View> lien : liensAffiche.entrySet()){
       lien.getValue().setVisibility(View.INVISIBLE);
@@ -566,11 +567,12 @@ public abstract class CameraActivity extends AppCompatActivity
 
       gestionLoca.resetLocalisation();
       resetNoeudsAffiche(0);
+      clearChemin();
+      destination="";
       runOnUiThread(
               new Runnable() {
                 @Override
                 public void run() {
-
                   LieuTrouveInfo(String.valueOf(0));
                 }
               });

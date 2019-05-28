@@ -38,10 +38,12 @@ public class GestionCarte implements Serializable {
      * Noeud à mémorizer pouvant être utilisé ultérieurement
      */
     private NoeudLieu memoire;
+
     /**
      * Map des objets existants.
      */
     public HashMap<String, Objet> objetsExistants;
+
 
     /**
      * Construit le gestionnaire de carte virtuelle.
@@ -360,6 +362,16 @@ public class GestionCarte implements Serializable {
         }
         courant.ajouterDerriere(node);
         node.ajouterDevant(courant);
+    }
+
+    /**
+     * Renvoi la liste de lieu du plus court chemin.
+     */
+    public ArrayList<Lieu> getPlusCourtChemin(String slieu1, String slieu2) {
+        Lieu lieu1 = new Lieu(slieu1);
+        Lieu lieu2 = new Lieu(slieu2);
+        BFS bfs = new BFS();
+        return bfs.BFSresult(lieuToNoeud(lieu1), lieuToNoeud(lieu2));
     }
 
     /**
@@ -789,6 +801,7 @@ public class GestionCarte implements Serializable {
         bi.close();
         return carte;
     }
+
 
     @Override
     public boolean equals(Object o) {
