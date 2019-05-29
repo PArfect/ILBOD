@@ -508,7 +508,6 @@ public abstract class CameraActivity extends AppCompatActivity
   }
 
   protected void clearChemin(){
-    int i = 0;
     for(HashMap.Entry<String, TextView> noeud : noeudsCheminAffiche.entrySet()){
         noeud.getValue().setBackgroundResource(R.drawable.circle2);
     }

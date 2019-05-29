@@ -6,6 +6,7 @@
     <color name="colorSecondaryDark">#1D1D1D</color>
     <color name="colorSecondary">#f1f1f1</color>
     <color name="colorAccent">#d2d0d1</color>
+    <color name="CirclePosition">#FF5722</color>
 
     <color name="semi_transparent">#66000000</color>
 </resources>

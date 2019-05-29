@@ -1,0 +1,35 @@
+Test with confidence higher than 0.3
+
+Good detection, low error
+ascenseur(elevator): ascenseur 93% (except for gray with a kind of mirror surface)
+tv: tv 87%
+poubelle(trash bin): poubelle 85%
+distributeur(dispenser): distributeur 86%
+extincteur(fire extinguisher): extincteur 90%
+grille(aeration grid): grille 94%
+plan(map): plan 97%
+fleche(green arrow): fleche classique 74%, flèche avec fauteuille roulant 60%
+alarme(fire alarm): alarme 80%
+
+Mediocre detection, low error
+lecteur(student card reader): lecteur 60%
+sortie(exit): sortie 40%
+radiateur(heater): radiateur 45%
+wifi: wifi 60%
+
+Good detection, high error
+Bonne reconnaissance mais assez souvent des erreurs
+eclair: eclair à 82%, fleche à 40% 
+vitrine: vitrine 87%, tv 60%, grille 40%
+tableau: tableau à 60%, grille à 70%, tv à 60%
+
+Mediocre detection, high error
+femme,homme: homme 30%, femme 60%, plan 80% (on va surement fusionner femme et homme en wc)
+
+Doors, hard to distinguish
+portecf: portecf 66%, porteb 60%
+portee: portecf 42%, porteb 32%
+porteb: porteb 40%
+
+Not recognized
+a,b,c,d,e, fontaine, detecteur

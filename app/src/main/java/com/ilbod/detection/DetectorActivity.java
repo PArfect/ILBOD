@@ -255,14 +255,16 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                             new Runnable() {
                               @Override
                               public void run() {
-                                  affichageLocalisations();
                                   gestionLoca.setLieuTrouveUpdatedFalse();
                                   LieuTrouveInfo(String.valueOf(noeudsDetectesAffiche.size()));
                                   if(!(destination.equals("")) && gestionLoca.getLieuxProbables().size()>0){
                                     clearChemin();
-                                    affichageChemin(gestionCarte.getPlusCourtChemin(gestionLoca.getLieuxProbables().get(0).getLieu().getNom(),destination));
-                                    affichageLocalisations();
+                                    String position = gestionLoca.getLieuxProbables().get(0).getLieu().getNom();
+                                    if(!destination.equals(position)){
+                                      affichageChemin(gestionCarte.getPlusCourtChemin(position,destination));
+                                    }
                                   }
+                                  affichageLocalisations();
                               }
                             });
                   }
@@ -283,6 +285,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
     Context context = getApplicationContext();
     int id;
     for(int i = 0; i<lieux.size()-1;i++){
+      //Le dernier lieu est la position de départ.
       afficheLien(lieux.get(i),lieux.get(i+1));
       nom = lieux.get(i).getNom();
       id = context.getResources().getIdentifier(nom,"id", context.getPackageName());
@@ -291,12 +294,6 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
       noeudsCheminAffiche.get(nom).setBackgroundResource(R.drawable.circle);
 
     }
-
-    nom = lieux.get(lieux.size()-1).getNom();
-    id = context.getResources().getIdentifier(nom,"id", context.getPackageName());
-
-    noeudsCheminAffiche.put(nom,findViewById(id));
-    noeudsCheminAffiche.get(nom).setVisibility(View.VISIBLE);
 
   }
 
@@ -351,7 +348,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
       int id = context.getResources().getIdentifier(nom,"id", context.getPackageName());
 
       noeudsDetectesAffiche.put(nom,findViewById(id));
-      noeudsDetectesAffiche.get(nom).setBackgroundResource(R.drawable.circle);
+      noeudsDetectesAffiche.get(nom).setBackgroundResource(R.drawable.circle1);
     }
   }
 
