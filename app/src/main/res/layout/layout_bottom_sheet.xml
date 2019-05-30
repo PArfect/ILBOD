@@ -85,6 +85,16 @@
         android:layout_marginTop="10dp"
         android:background="@android:color/darker_gray" />
 
+    <Spinner
+        android:id="@+id/object_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/colorPrimarytransparent"
+        android:popupBackground="@android:color/transparent"
+        android:dropDownWidth="200dp"
+        android:gravity="right"
+        />
+
     <!-- TODO(b/112541284): Unhide when new NNAPI delegate is used. -->
 
     <LinearLayout

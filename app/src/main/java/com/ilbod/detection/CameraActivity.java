@@ -53,10 +53,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ilbod.detection.carte.Objet;
 import com.ilbod.detection.env.ImageUtils;
 import com.ilbod.detection.env.Logger;
 
 import java.nio.ByteBuffer;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.ilbod.detection.carte.GestionCarte;
@@ -102,6 +104,8 @@ public abstract class CameraActivity extends AppCompatActivity
   protected String[] noeudsCorrespondant;
   protected String destination;
   protected Spinner destinationSpin;
+  protected ArrayList<String> objets;
+  protected Spinner objetSpin;
   protected HashMap<String,TextView> noeudsDetectesAffiche;
   protected HashMap<String,TextView> noeudsCheminAffiche;
   protected HashMap<String,View> liensAffiche;
@@ -136,6 +140,14 @@ public abstract class CameraActivity extends AppCompatActivity
     ArrayAdapter aa = ArrayAdapter.createFromResource(this,R.array.destinations, R.layout.spinner_item_dropdown);
     aa.setDropDownViewResource(R.layout.spinner_item);
     destinationSpin.setAdapter(aa);
+    objetSpin = findViewById(R.id.object_spinner);
+    objets = new ArrayList<>();
+    for(String nom : gestionCarte.objetsExistants.keySet()){
+      objets.add(nom);
+    }
+    aa = new ArrayAdapter(this,R.layout.spinner_item_dropdown,objets);
+    aa.setDropDownViewResource(R.layout.spinner_item);
+    objetSpin.setAdapter(aa);
 
 
 
@@ -581,11 +593,15 @@ public abstract class CameraActivity extends AppCompatActivity
   //Performing action onItemSelected and onNothing selected
   @Override
   public void onItemSelected(AdapterView<?> arg0, View arg1, int position,long id) {
-    if(liensAffiche.size()!=0){
-      clearChemin();
+    switch(arg0.getId()){
+      case R.id.dest_spinner:
+        if(liensAffiche.size()!=0){
+          clearChemin();
+        }
+        Toast.makeText(getApplicationContext(), destinations[position], Toast.LENGTH_LONG).show();
+        destination = noeudsCorrespondant[position];
+        break;
     }
-    Toast.makeText(getApplicationContext(), destinations[position], Toast.LENGTH_LONG).show();
-    destination = noeudsCorrespondant[position];
 
   }
 
