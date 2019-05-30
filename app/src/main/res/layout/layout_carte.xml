@@ -20,7 +20,7 @@
             android:layout_height="match_parent"
             android:layout_marginBottom="8dp"
             android:scaleType="fitXY"
-            android:src="@drawable/cartereduit2"
+            android:src="@drawable/cartereduit"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.454"

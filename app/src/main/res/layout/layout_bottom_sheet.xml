@@ -85,15 +85,32 @@
         android:layout_marginTop="10dp"
         android:background="@android:color/darker_gray" />
 
-    <Spinner
-        android:id="@+id/object_spinner"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@color/colorPrimarytransparent"
-        android:popupBackground="@android:color/transparent"
-        android:dropDownWidth="200dp"
-        android:gravity="right"
-        />
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/show_objet"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Show"
+            android:onClick="onClick"
+            android:background="@color/colorPrimary"
+            android:textColor="@color/colorSecondary"
+            android:popupBackground="@android:color/transparent"
+            />
+
+        <Spinner
+            android:id="@+id/object_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimarytransparent"
+            android:popupBackground="@android:color/transparent"
+            android:dropDownWidth="200dp"
+            android:gravity="right"
+            />
+
+    </LinearLayout>
 
     <!-- TODO(b/112541284): Unhide when new NNAPI delegate is used. -->
 

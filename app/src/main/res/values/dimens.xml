@@ -15,4 +15,7 @@
     <dimen name="circle">15dp</dimen>
     <dimen name="circle2">8dp</dimen>
 
+    <dimen name="objet_show_dialog_h">600dp</dimen>
+    <dimen name="objet_show_dialog_w">400dp</dimen>
+
 </resources>

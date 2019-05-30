@@ -17,6 +17,7 @@
 package com.ilbod.detection;
 
 import android.Manifest;
+import android.app.Dialog;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -34,6 +35,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Trace;
+import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.v7.app.AppCompatActivity;
@@ -43,9 +45,11 @@ import android.util.Size;
 import android.view.Surface;
 import android.view.View;
 import android.view.ViewTreeObserver;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -63,6 +67,8 @@ import java.util.HashMap;
 
 import com.ilbod.detection.carte.GestionCarte;
 import com.ilbod.detection.localisation.GestionLocalisation;
+
+import org.w3c.dom.Text;
 
 public abstract class CameraActivity extends AppCompatActivity
         implements OnImageAvailableListener,
@@ -105,6 +111,7 @@ public abstract class CameraActivity extends AppCompatActivity
   protected String destination;
   protected Spinner destinationSpin;
   protected ArrayList<String> objets;
+  protected String objetShow;
   protected Spinner objetSpin;
   protected HashMap<String,TextView> noeudsDetectesAffiche;
   protected HashMap<String,TextView> noeudsCheminAffiche;
@@ -141,12 +148,15 @@ public abstract class CameraActivity extends AppCompatActivity
     aa.setDropDownViewResource(R.layout.spinner_item);
     destinationSpin.setAdapter(aa);
     objetSpin = findViewById(R.id.object_spinner);
+    objetSpin.setOnItemSelectedListener(this);
     objets = new ArrayList<>();
+    objets.add("Objets Détectables");
     for(String nom : gestionCarte.objetsExistants.keySet()){
       objets.add(nom);
     }
     aa = new ArrayAdapter(this,R.layout.spinner_item_dropdown,objets);
     aa.setDropDownViewResource(R.layout.spinner_item);
+    objetShow = "";
     objetSpin.setAdapter(aa);
 
 
@@ -539,6 +549,36 @@ public abstract class CameraActivity extends AppCompatActivity
     occurrenceLieu = occurrence;
   }
 
+  public void showObjetDialog(String string){
+    Dialog objetDialog = new Dialog(CameraActivity.this);
+    objetDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+    objetDialog.setContentView(R.layout.objet_dialog);
+    objetDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+
+    Button close = objetDialog.findViewById(R.id.close);
+    TextView objetNom = objetDialog.findViewById(R.id.obj_dialog_title);
+    objetNom.setText(objetShow);
+
+    Context context = getApplicationContext();
+    ImageView objetimage = objetDialog.findViewById(R.id.obj_dialog_image);
+    int id = context.getResources().getIdentifier(objetShow,"drawable", context.getPackageName());
+    if(id == 0){
+      objetimage.setImageResource(R.drawable.logo_transparent);
+    }
+    else{
+      objetimage.setImageResource(id);
+    }
+
+    close.setEnabled(true);
+    close.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        objetDialog.cancel();
+      }
+    });
+    objetDialog.show();
+  }
+
   public boolean isDebug() {
     return debug;
   }
@@ -588,6 +628,9 @@ public abstract class CameraActivity extends AppCompatActivity
                 }
               });
     }
+    else if(v.getId() == R.id.show_objet){
+      showObjetDialog(objetShow);
+    }
   }
 
   //Performing action onItemSelected and onNothing selected
@@ -600,6 +643,9 @@ public abstract class CameraActivity extends AppCompatActivity
         }
         Toast.makeText(getApplicationContext(), destinations[position], Toast.LENGTH_LONG).show();
         destination = noeudsCorrespondant[position];
+        break;
+      case R.id.object_spinner:
+        objetShow = objets.get(position);
         break;
     }
 
