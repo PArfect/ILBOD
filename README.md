@@ -3,7 +3,7 @@ This project was made by 3 students from TélécomSudParis: Arthur Oulmi, Pierre
 
 We named this project ILBOD and it is an android app based on TensorflowLite Object Detection examples. The purpose of our app is to position its user indoor through Neural Network Object Detection. We choose to use TensorflowLit example as a base because it would be too time consuming to reprogram all the camera and tracking features that would be needed.
 
-The app was is at the moment made for our school ground floor. (Specific labelmap and neural network as well as a xml map using androidstudio layout) However, it can be adapted to other places. (You can check HowToAdapt.txt)
+The app was at the moment made for our school ground floor. (Specific labelmap and neural network as well as a xml map using androidstudio layout) However, it can be adapted to other places. (You can check HowToAdapt.txt)
 
 Our network was retrained from ssd_mobilenet_v2_coco with a set of more than 1000 photographs of our school and our own labelmap because the specific objects required for our detection was not present in coco labelmap. You can find an evaluation of the network in NeuralNetworkEvaluation.txt.
 
